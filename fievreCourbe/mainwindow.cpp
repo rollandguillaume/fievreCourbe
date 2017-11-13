@@ -12,8 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     stack = new QStackedWidget(this);
     config_win = new ConfigWindow(this);
+    game_win = new GameWindow(this);
 
     stack->addWidget(config_win);
+    stack->addWidget(game_win);
     this->setCentralWidget(stack);
     stack->setCurrentIndex(0);
 
@@ -34,15 +36,11 @@ void MainWindow::dialogHelp () {
 
 void MainWindow::showConfig () {
     //TODO
-    delete game_win;
     stack->setCurrentIndex(0);
 }
 
 void MainWindow::showGame () {
     //TODO
-    delete game_win;
-    game_win = new GameWindow(this);
-    stack->addWidget(game_win);
     stack->setCurrentIndex(1);
-//    qDebug() << QString("stack count") << QString::number(stack->count());
+    qDebug() << QString("stack count") << QString::number(stack->count());
 }
