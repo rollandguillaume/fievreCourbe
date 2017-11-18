@@ -34,7 +34,7 @@
      <string>&amp;File</string>
     </property>
     <addaction name="action_new"/>
-    <addaction name="action_Start"/>
+    <addaction name="action_config"/>
     <addaction name="separator"/>
     <addaction name="action_quit"/>
    </widget>
@@ -56,9 +56,9 @@
     <string>Ctrl+Shift+Q</string>
    </property>
   </action>
-  <action name="action_new">
+  <action name="action_config">
    <property name="text">
-    <string>&amp;New</string>
+    <string>&amp;Config</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+N</string>
@@ -72,9 +72,9 @@
     <string>Ctrl+Shift+H</string>
    </property>
   </action>
-  <action name="action_Start">
+  <action name="action_new">
    <property name="text">
-    <string>&amp;Start</string>
+    <string>&amp;New</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
@@ -90,8 +90,24 @@
    <slot>dialogHelp()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>579</x>
-     <y>309</y>
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_config</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showConfig()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -103,5 +119,6 @@
  <slots>
   <slot>dialogHelp()</slot>
   <slot>play()</slot>
+  <slot>showConfig()</slot>
  </slots>
 </ui>

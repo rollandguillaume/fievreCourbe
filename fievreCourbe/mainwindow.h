@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <dialog_help.h>
 #include <QStackedWidget>
-#include <configwindow.h>
+#include <dialogconfig.h>
 #include <gamewindow.h>
 #include <QComboBox>
 
@@ -23,15 +23,12 @@ public:
 private:
     Ui::MainWindow *ui;
     Dialog_help *dialog_help;
-
-    QStackedWidget *stack;
-    ConfigWindow *config_win;
+    DialogConfig *dialogConfig;
     GameWindow *game_win;
 
 public slots:
     void dialogHelp();
     void showConfig();
-    void showGame();
 };
 
 #endif // MAINWINDOW_H

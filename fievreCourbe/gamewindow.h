@@ -2,21 +2,21 @@
 #define GAMEWINDOW_H
 
 #include <QWidget>
+#include <QtGui>
+#include "snake.h"
 
-namespace Ui {
-class GameWindow;
-}
-
-class GameWindow : public QWidget
+class GameWindow : public QGraphicsView
 {
     Q_OBJECT
 
 public:
-    explicit GameWindow(QWidget *parent = 0);
+    GameWindow(QWidget *parent = 0);
     ~GameWindow();
 
 private:
-    Ui::GameWindow *ui;
+    Snake * un;
+    Snake * deux;
+
 };
 
 #endif // GAMEWINDOW_H
