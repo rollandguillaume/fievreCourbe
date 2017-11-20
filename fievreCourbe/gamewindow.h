@@ -12,7 +12,11 @@ class GameWindow : public QGraphicsView
 public:
     GameWindow(QWidget *parent = 0);
     ~GameWindow();
-
+public:
+    void keyPressEvent(QKeyEvent * event);
+    void keyReleaseEvent(QKeyEvent * event);
+public slots:
+    void play();
 private:
     Snake * un;
     Snake * deux;

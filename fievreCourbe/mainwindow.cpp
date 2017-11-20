@@ -12,10 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
     dialog_help = new Dialog_help(this);
     dialogConfig = new DialogConfig(this);
 
-
     game_win = new GameWindow(this);
     this->setCentralWidget(game_win);
-
 
 }
 

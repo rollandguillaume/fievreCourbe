@@ -4,21 +4,25 @@
 #include <QThread>
 #include <QGraphicsRectItem>
 
-class Snake : public QGraphicsRectItem, public QThread
+class Snake : public QGraphicsRectItem
 {
 public:
     Snake(std::__cxx11::string name, int x, int y);
-
-public:
-    void run();
-    void keyPressEvent(QKeyEvent * event);
-    void keyReleaseEvent(QKeyEvent * event);
+    void move();
+    void rotation();
+    void setKeyRight(bool press);
+    void setKeyLeft(bool press);
+private:
+    void calculDirY(bool up);
 
 private:
     std::string name;
     int step;
-    bool right;
-    bool left;
+    float dirX;
+    float dirY;
+    bool keyRight;
+    bool keyLeft;
+    float rota;//degree for x
 
 };
 
