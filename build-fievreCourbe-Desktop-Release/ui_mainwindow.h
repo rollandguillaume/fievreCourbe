@@ -17,7 +17,6 @@
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
-#include <QtGui/QStatusBar>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -33,13 +32,12 @@ public:
     QMenuBar *menubar;
     QMenu *menu_File;
     QMenu *menu_Help;
-    QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(800, 600);
+        MainWindow->resize(258, 186);
         MainWindow->setMouseTracking(false);
         action_quit = new QAction(MainWindow);
         action_quit->setObjectName(QString::fromUtf8("action_quit"));
@@ -54,16 +52,13 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 19));
+        menubar->setGeometry(QRect(0, 0, 258, 19));
         menubar->setNativeMenuBar(false);
         menu_File = new QMenu(menubar);
         menu_File->setObjectName(QString::fromUtf8("menu_File"));
         menu_Help = new QMenu(menubar);
         menu_Help->setObjectName(QString::fromUtf8("menu_Help"));
         MainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
-        MainWindow->setStatusBar(statusbar);
 
         menubar->addAction(menu_File->menuAction());
         menubar->addAction(menu_Help->menuAction());

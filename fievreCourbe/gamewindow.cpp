@@ -1,30 +1,24 @@
 #include "gamewindow.h"
 #include <QTimer>
+#include <iostream>
 
 #include <QDebug>
 
-GameWindow::GameWindow(QWidget *parent)
+GameWindow::GameWindow(QWidget *parent, int width, int height)
     : QGraphicsView(parent)
 {
-
-    un = new Snake("un", 30, 40);
-    deux = new Snake("deux", 50, 100);
-
-
-    QGraphicsScene * scene = new QGraphicsScene();
-    scene->addItem(un);
-    scene->addItem(deux);
-
+    scene = new QGraphicsScene();
     this->setScene(scene);
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    this->setFixedSize(800, 600);
-    scene->setSceneRect(0,0,800,600);
+    this->setFixedSize(width, height);
+    scene->setSceneRect(0,0,width,height);
 
-    QTimer * clock = new QTimer();
+    clock = new QTimer();
     connect(clock,SIGNAL(timeout()),this,SLOT(play()));
-    clock->start(50);
+
+    initPart();
 
 
 }
@@ -37,17 +31,22 @@ GameWindow::~GameWindow()
 void GameWindow::keyPressEvent(QKeyEvent *event)
 {
     if (event->isAutoRepeat()==false) {
-        if (event->key() == Qt::Key_Left){
-            un->setKeyLeft(true);
+        int size = snakes.size();
+        for (int s = 0; s < size; s++) {
+            if (event->key() == snakes[s]->getKeyOnRight()) {
+                snakes[s]->setKeyRight(true);
+            } else if (event->key() == snakes[s]->getKeyOnLeft()) {
+                snakes[s]->setKeyLeft(true);
+            }
         }
-        else if (event->key() == Qt::Key_Right){
-            un->setKeyRight(true);
-        }
-        else if (event->key() == Qt::Key_Q){
-            deux->setKeyLeft(true);
-        }
-        else if (event->key() == Qt::Key_S){
-            deux->setKeyRight(true);
+
+        //EVENT PAUSE
+        if (event->key() == Qt::Key_Space) {
+            if (clock->isActive()) {
+                clock->stop();
+            } else {
+                clock->start(50);
+            }
         }
     }
 }
@@ -55,26 +54,68 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
 void GameWindow::keyReleaseEvent(QKeyEvent *event)
 {
     if (event->isAutoRepeat()==false) {
+        int size = snakes.size();
+        for (int s = 0; s < size; s++) {
+            if (event->key() == snakes[s]->getKeyOnRight()) {
+                snakes[s]->setKeyRight(false);
+            } else if (event->key() == snakes[s]->getKeyOnLeft()) {
+                snakes[s]->setKeyLeft(false);
+            }
+        }
+    }
+}
 
-        if (event->key() == Qt::Key_Left){
-            un->setKeyLeft(false);
-        }
-        else if (event->key() == Qt::Key_Right){
-            un->setKeyRight(false);
-        }
-        else if (event->key() == Qt::Key_Q){
-            deux->setKeyLeft(false);
-        }
-        else if (event->key() == Qt::Key_S){
-            deux->setKeyRight(false);
-        }
+void GameWindow::initPart()
+{
+    clock->stop();
+
+    toRemoveSnakesOnScene();
+    createSnakes();
+    toPlaceSnakesOnScene();
+}
+
+void GameWindow::toPlaceSnakesOnScene()
+{
+    //give a random position
+    snakes[0]->setPos(30, 40);
+    snakes[1]->setPos(50, 100);
+
+    //to place all snakes
+    int size = snakes.size();
+    for (int s = 0; s < size; s++) {
+        scene->addItem(snakes[s]);
+    }
+}
+
+void GameWindow::createSnakes()
+{
+    snakes.clear();
+
+
+    snakes.push_back(new Snake("un"));
+
+    snakes[0]->setKeyOnRight("3");
+    snakes[0]->setKeyOnLeft("2");
+    snakes.push_back(new Snake("deux"));
+
+    snakes[1]->setKeyOnRight("s");
+    snakes[1]->setKeyOnLeft("q");
+}
+
+void GameWindow::toRemoveSnakesOnScene()
+{
+    int size = snakes.size();
+    for (int s = 0; s < size; s++) {
+        scene->removeItem(snakes[s]);
     }
 }
 
 void GameWindow::play()
 {
-    un->move();
-    deux->move();
+    int size = snakes.size();
+    for (int s = 0; s < size; s++) {
+        snakes[s]->move();
+    }
 }
 
 

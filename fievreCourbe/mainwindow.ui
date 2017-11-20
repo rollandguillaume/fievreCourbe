@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>258</width>
+    <height>186</height>
    </rect>
   </property>
   <property name="mouseTracking">
@@ -22,7 +22,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>258</width>
      <height>19</height>
     </rect>
    </property>
@@ -47,7 +47,6 @@
    <addaction name="menu_File"/>
    <addaction name="menu_Help"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="action_quit">
    <property name="text">
     <string>&amp;Quit</string>
@@ -94,8 +93,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
+     <x>257</x>
+     <y>185</y>
     </hint>
    </hints>
   </connection>
@@ -110,8 +109,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
+     <x>257</x>
+     <y>185</y>
     </hint>
    </hints>
   </connection>

@@ -19,6 +19,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
+#include <QtGui/QPushButton>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -38,6 +39,8 @@ public:
     QCheckBox *checkBox_p1;
     QLineEdit *lineEdit_l_2;
     QLineEdit *lineEdit_r_2;
+    QPushButton *pushButton_valid;
+    QPushButton *pushButton_annul;
 
     void setupUi(QDialog *DialogConfig)
     {
@@ -105,8 +108,16 @@ public:
 
         gridLayout->addWidget(lineEdit_r_2, 2, 3, 1, 1);
 
+        pushButton_valid = new QPushButton(DialogConfig);
+        pushButton_valid->setObjectName(QString::fromUtf8("pushButton_valid"));
+        pushButton_valid->setGeometry(QRect(220, 260, 80, 22));
+        pushButton_annul = new QPushButton(DialogConfig);
+        pushButton_annul->setObjectName(QString::fromUtf8("pushButton_annul"));
+        pushButton_annul->setGeometry(QRect(310, 260, 80, 22));
 
         retranslateUi(DialogConfig);
+        QObject::connect(pushButton_valid, SIGNAL(clicked()), DialogConfig, SLOT(accept()));
+        QObject::connect(pushButton_annul, SIGNAL(clicked()), DialogConfig, SLOT(reject()));
 
         QMetaObject::connectSlotsByName(DialogConfig);
     } // setupUi
@@ -118,6 +129,8 @@ public:
         label_left->setText(QApplication::translate("DialogConfig", "gauche", 0, QApplication::UnicodeUTF8));
         label_name->setText(QApplication::translate("DialogConfig", "pseudo", 0, QApplication::UnicodeUTF8));
         checkBox_p1->setText(QApplication::translate("DialogConfig", "joue", 0, QApplication::UnicodeUTF8));
+        pushButton_valid->setText(QApplication::translate("DialogConfig", "Valider", 0, QApplication::UnicodeUTF8));
+        pushButton_annul->setText(QApplication::translate("DialogConfig", "Annuler", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

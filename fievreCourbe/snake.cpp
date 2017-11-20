@@ -6,10 +6,10 @@
 
 #include <QDebug>
 
-Snake::Snake(std::string name, int x, int y)
+Snake::Snake(std::string name)
 {
     this->name = name;
-    this->setRect(x,y,10,10);
+    this->setRect(0,0,10, 10);
     this->step = 5;
 
     this->keyLeft = false;
@@ -22,7 +22,17 @@ void Snake::move()
 {
     rotation();
     float radToDeg = direction * M_PI / 180;
-    setPos(x()+step*cos(radToDeg),y()+step*sin(radToDeg));
+    float x2 = x()+step*cos(radToDeg);
+    float y2 = y()+step*sin(radToDeg);
+//    qDebug() << x2<<","<< y2;
+// gestion sortie fenetre des serpents
+//    if (x2<=0) {
+
+//    }
+//    if (y2<=0) {
+
+//    }
+    setPos(x2, y2);
 }
 
 void Snake::rotation()
@@ -46,6 +56,28 @@ void Snake::setKeyRight(bool press)
 void Snake::setKeyLeft(bool press)
 {
     this->keyLeft = press;
+}
+
+void Snake::setKeyOnRight(std::__cxx11::string val)
+{
+    QKeySequence seq = QKeySequence(QString::fromStdString(val));
+    keyOnRight = seq[0];
+}
+
+void Snake::setKeyOnLeft(std::__cxx11::string val)
+{
+    QKeySequence seq = QKeySequence(QString::fromStdString(val));
+    keyOnLeft = seq[0];
+}
+
+int Snake::getKeyOnRight() const
+{
+    return keyOnRight;
+}
+
+int Snake::getKeyOnLeft() const
+{
+    return keyOnLeft;
 }
 
 

@@ -29,6 +29,7 @@ private:
 public slots:
     void dialogHelp();
     void showConfig();
+    void makeSnakes();
 };
 
 #endif // MAINWINDOW_H

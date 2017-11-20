@@ -10,16 +10,22 @@ class GameWindow : public QGraphicsView
     Q_OBJECT
 
 public:
-    GameWindow(QWidget *parent = 0);
+    GameWindow(QWidget *parent = 0, int width = 500, int height = 500);
     ~GameWindow();
-public:
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent * event);
+    void createSnakes();
+private:
+    void toPlaceSnakesOnScene();
+    void toRemoveSnakesOnScene();
 public slots:
     void play();
+    void initPart();
 private:
-    Snake * un;
-    Snake * deux;
+    QTimer * clock;
+    QGraphicsScene * scene;
+    std::vector<Snake*> snakes;
+
 
 };
 

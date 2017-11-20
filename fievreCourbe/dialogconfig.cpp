@@ -6,6 +6,8 @@ DialogConfig::DialogConfig(QWidget *parent) :
     ui(new Ui::DialogConfig)
 {
     ui->setupUi(this);
+
+    connect(this,SIGNAL(accepted()), parent, SLOT(makeSnakes()));
 }
 
 DialogConfig::~DialogConfig()

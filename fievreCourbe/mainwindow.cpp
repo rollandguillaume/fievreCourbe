@@ -12,8 +12,14 @@ MainWindow::MainWindow(QWidget *parent) :
     dialog_help = new Dialog_help(this);
     dialogConfig = new DialogConfig(this);
 
-    game_win = new GameWindow(this);
+    int width = 600;
+    int height = 500;
+    setFixedSize(width, height);
+
+    game_win = new GameWindow(this, width, height);
     this->setCentralWidget(game_win);
+
+    QObject::connect(ui->action_new, SIGNAL(triggered(bool)), game_win, SLOT(initPart()));
 
 }
 
@@ -28,5 +34,12 @@ void MainWindow::dialogHelp () {
 
 void MainWindow::showConfig () {
     dialogConfig->show();
+}
+
+void MainWindow::makeSnakes()
+{
+    qDebug() << "make snakes";
+    //recuperer les infos de dialogconfig
+    //a transmettre a game_win
 }
 

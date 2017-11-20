@@ -90,7 +90,66 @@
     </item>
    </layout>
   </widget>
+  <widget class="QPushButton" name="pushButton_valid">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>260</y>
+     <width>80</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Valider</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_annul">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>260</y>
+     <width>80</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Annuler</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_valid</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogConfig</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>252</x>
+     <y>244</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_annul</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogConfig</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>325</x>
+     <y>268</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
