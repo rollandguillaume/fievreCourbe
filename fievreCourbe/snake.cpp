@@ -38,10 +38,13 @@ void Snake::move()
 void Snake::rotation()
 {
 //    qDebug()<<"angle:" << angle << " ; direction:"<<direction;
-    if (keyRight) {
-        direction += angle;
-    } else if (keyLeft) {
-        direction -= angle;
+    if (!(keyRight && keyLeft)) {
+
+        if (keyRight) {
+            direction += angle;
+        } else if (keyLeft) {
+            direction -= angle;
+        }
     }
 
     direction = direction % 360;

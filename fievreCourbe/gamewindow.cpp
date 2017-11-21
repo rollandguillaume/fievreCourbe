@@ -45,7 +45,7 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
             if (clock->isActive()) {
                 clock->stop();
             } else {
-                clock->start(50);
+                clock->start(40);
             }
         }
     }
