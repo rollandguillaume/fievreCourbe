@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QtGui>
 #include "snake.h"
+#include "wall.h"
 
 class GameWindow : public QGraphicsView
 {
@@ -18,14 +19,18 @@ public:
 private:
     void toPlaceSnakesOnScene();
     void toRemoveSnakesOnScene();
+    void erectWalls();
+    void destroyWalls();
+
 public slots:
     void play();
     void initPart();
+
 private:
     QTimer * clock;
     QGraphicsScene * scene;
     std::vector<Snake*> snakes;
-
+    std::vector<Wall*> walls;
 
 };
 

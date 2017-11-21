@@ -16,9 +16,20 @@ public:
     void setKeyOnLeft(std::string val);
     int getKeyOnRight() const;
     int getKeyOnLeft() const;
+    bool checkColisions();
+    bool isAlive();
+    void getOutOfHell();
 
 private:
     void rotation();
+    std::vector<int> checkDirection();
+    void commitSuicide();
+
+public:
+    static const int BAS = 0;
+    static const int DROITE = 1;//direction du serpent
+    static const int GAUCHE = 2;
+    static const int HAUT = 3;
 
 private:
     std::string name;
@@ -29,6 +40,7 @@ private:
     int angle;//angle de rotation
     int keyOnRight;//value of the key to turn on right
     int keyOnLeft;
+    bool life;
 
 };
 

@@ -75,6 +75,9 @@ void GameWindow::initPart()
     toRemoveSnakesOnScene();
     createSnakes();
     toPlaceSnakesOnScene();
+
+    destroyWalls();
+    erectWalls();
 }
 
 void GameWindow::toPlaceSnakesOnScene()
@@ -113,12 +116,40 @@ void GameWindow::toRemoveSnakesOnScene()
     }
 }
 
+void GameWindow::erectWalls()
+{
+    int width = 500;
+    int height = 500;
+    int wallSize = 5;
+
+    walls.push_back(new Wall(0, 0, wallSize, height));
+    walls.push_back(new Wall(width-wallSize, 0, wallSize, height));
+    walls.push_back(new Wall(0, height-wallSize, width, wallSize));
+    walls.push_back(new Wall(0, 0, width, wallSize));
+
+    int size = walls.size();
+    for (int s = 0; s < size; s++) {
+        scene->addItem(walls[s]);
+    }
+
+}
+
+void GameWindow::destroyWalls()
+{
+    int size = walls.size();
+    for (int s = 0; s < size; s++) {
+        scene->removeItem(walls[s]);
+    }
+}
+
 void GameWindow::play()
 {
-    int size = snakes.size();
-    for (int s = 0; s < size; s++) {
-        snakes[s]->move();
-    }
+//    int size = snakes.size();
+//    for (int s = 0; s < size; s++) {
+//        snakes[s]->move();
+//    }
+            snakes[0]->move();
+
 }
 
 

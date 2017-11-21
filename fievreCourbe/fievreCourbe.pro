@@ -10,7 +10,9 @@ SOURCES += \
     gamewindow.cpp \
     dialogconfig.cpp \
     snake.cpp \
-    scoreboard.cpp
+    scoreboard.cpp \
+    wall.cpp \
+    config.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -18,7 +20,9 @@ HEADERS += \
     gamewindow.h \
     dialogconfig.h \
     snake.h \
-    scoreboard.h
+    scoreboard.h \
+    wall.h \
+    config.h
 
 FORMS += \
     mainwindow.ui \
