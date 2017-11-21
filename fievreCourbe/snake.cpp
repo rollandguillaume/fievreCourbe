@@ -2,6 +2,8 @@
 #include <iostream>
 #include <QKeyEvent>
 #include <math.h>
+#include <QBrush>
+#include <QPen>
 
 
 #include <QDebug>
@@ -9,12 +11,16 @@
 Snake::Snake(std::string name)
 {
     this->name = name;
-    this->setRect(0,0,10, 10);
-    this->step = 5;
+    this->setRect(0,0,7,7);
+    this->step = 1;
+
+    this->setBrush(QBrush(Qt::yellow));
+
+    this->setPen(QPen(Qt::NoPen));
 
     this->keyLeft = false;
     this->keyRight = false;
-    this->angle = 10;
+    this->angle = 2.5;
     this->direction = 0;
 }
 

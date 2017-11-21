@@ -1,6 +1,7 @@
 #include "gamewindow.h"
 #include <QTimer>
 #include <iostream>
+#include <QBrush>
 
 #include <QDebug>
 
@@ -14,6 +15,8 @@ GameWindow::GameWindow(QWidget *parent, int width, int height)
 
     this->setFixedSize(width, height);
     scene->setSceneRect(0,0,width,height);
+
+    this->setBackgroundBrush(QBrush(Qt::black));
 
     clock = new QTimer();
     connect(clock,SIGNAL(timeout()),this,SLOT(play()));
@@ -45,7 +48,7 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
             if (clock->isActive()) {
                 clock->stop();
             } else {
-                clock->start(40);
+                clock->start(13);
             }
         }
     }

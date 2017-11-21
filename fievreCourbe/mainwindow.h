@@ -6,6 +6,7 @@
 #include <QStackedWidget>
 #include <dialogconfig.h>
 #include <gamewindow.h>
+#include <scoreboard.h>
 #include <QComboBox>
 
 namespace Ui {
@@ -25,6 +26,8 @@ private:
     Dialog_help *dialog_help;
     DialogConfig *dialogConfig;
     GameWindow *game_win;
+    QLayout *layout;
+    ScoreBoard *sb;
 
 public slots:
     void dialogHelp();

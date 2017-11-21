@@ -12,15 +12,21 @@ MainWindow::MainWindow(QWidget *parent) :
     dialog_help = new Dialog_help(this);
     dialogConfig = new DialogConfig(this);
 
-    int width = 600;
+    int width = 500;
     int height = 500;
-    setFixedSize(width, height);
 
+    layout = new QHBoxLayout();
     game_win = new GameWindow(this, width, height);
-    this->setCentralWidget(game_win);
+    layout->addWidget(game_win);
+    sb = new ScoreBoard(this);
+    layout->addWidget(sb);
+
+
+    this->centralWidget()->setLayout(layout);
+
+    setFixedSize(sb->width()+game_win->width()+layout->margin(), game_win->height()+ui->menubar->height()+layout->margin()*2);
 
     QObject::connect(ui->action_new, SIGNAL(triggered(bool)), game_win, SLOT(initPart()));
-
 }
 
 MainWindow::~MainWindow()
