@@ -8,7 +8,7 @@
 class Snake : public QGraphicsEllipseItem
 {
 public:
-    Snake(std::__cxx11::string name);
+    Snake(QString name);
     void move();
     void setKeyRight(bool press);
     void setKeyLeft(bool press);
@@ -19,6 +19,10 @@ public:
     bool checkColisions();
     bool isAlive();
     void getOutOfHell();
+    QString getName();
+    int getScore();
+    void resetScore();
+    void addPoint();
 
 private:
     void rotation();
@@ -32,7 +36,8 @@ public:
     static const int HAUT = 3;
 
 private:
-    std::string name;
+    QString name;
+    int score;
     int step;
     bool keyRight;//key right press ??
     bool keyLeft;

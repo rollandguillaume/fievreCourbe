@@ -98,14 +98,19 @@ void GameWindow::createSnakes()
     snakes.clear();
 
 
-    snakes.push_back(new Snake("un"));
+    snakes.push_back(new Snake(QString("Joueur 1")));
 
     snakes[0]->setKeyOnRight("3");
     snakes[0]->setKeyOnLeft("2");
-    snakes.push_back(new Snake("deux"));
+    snakes.push_back(new Snake(QString("Joueur 2")));
 
     snakes[1]->setKeyOnRight("s");
     snakes[1]->setKeyOnLeft("q");
+}
+
+std::vector<Snake*>* GameWindow::getSnakes()
+{
+    return &snakes;
 }
 
 void GameWindow::toRemoveSnakesOnScene()
@@ -121,11 +126,12 @@ void GameWindow::erectWalls()
     int width = 500;
     int height = 500;
     int wallSize = 5;
-
-    walls.push_back(new Wall(0, 0, wallSize, height));
-    walls.push_back(new Wall(width-wallSize, 0, wallSize, height));
-    walls.push_back(new Wall(0, height-wallSize, width, wallSize));
-    walls.push_back(new Wall(0, 0, width, wallSize));
+    if(walls.size()==0){
+        walls.push_back(new Wall(0, 0, wallSize, height));
+        walls.push_back(new Wall(width-wallSize, 0, wallSize, height));
+        walls.push_back(new Wall(0, height-wallSize, width, wallSize));
+        walls.push_back(new Wall(0, 0, width, wallSize));
+    }
 
     int size = walls.size();
     for (int s = 0; s < size; s++) {
@@ -151,5 +157,6 @@ void GameWindow::play()
             snakes[0]->move();
 
 }
+
 
 

@@ -9,9 +9,10 @@
 
 #include <QDebug>
 
-Snake::Snake(std::string name)
+Snake::Snake(QString name)
 {
     this->name = name;
+    this->score = 0;
     this->setRect(0,0,Config::SIZE_SNAKE, Config::SIZE_SNAKE);
     this->step = 1;
 
@@ -35,13 +36,13 @@ void Snake::move()
         float y2 = y()+step*sin(radToDeg);
 
         if (checkColisions()) {
-            //colision so snake must be dead :s
-            //the snake stop because his position is not update anymore
+            // Colision so snake must be dead :s
+            // The snake stop because his position is not updated anymore
             commitSuicide();
 
         } else {
-            // gestion sortie fenetre des serpents
-            int width = 500;//TODO a trouver ailleur : une classe Config Static ??
+            // Gestion sortie fenetre des serpents
+            int width = 500; //TODO a trouver ailleur : une classe Config Static ??
             int height = 500;
 
             std::vector<int> dir = checkDirection();
@@ -177,6 +178,26 @@ bool Snake::isAlive()
 void Snake::getOutOfHell()
 {
     life = true;
+}
+
+QString Snake::getName()
+{
+    return name;
+}
+
+int Snake::getScore()
+{
+    return score;
+}
+
+void Snake::resetScore()
+{
+    this->score = 0;
+}
+
+void Snake::addPoint()
+{
+    this->score++;
 }
 
 

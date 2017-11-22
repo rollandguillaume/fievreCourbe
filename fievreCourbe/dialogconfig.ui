@@ -37,7 +37,7 @@
      </widget>
     </item>
     <item row="2" column="0">
-     <widget class="QLineEdit" name="lineEdit_n_2"/>
+     <widget class="QLineEdit" name="nom2"/>
     </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label_name">
@@ -50,21 +50,21 @@
      </widget>
     </item>
     <item row="2" column="2">
-     <widget class="QLineEdit" name="lineEdit_l_2">
+     <widget class="QLineEdit" name="gauche2">
       <property name="maxLength">
        <number>1</number>
       </property>
      </widget>
     </item>
     <item row="1" column="3">
-     <widget class="QLineEdit" name="lineEdit_r_1">
+     <widget class="QLineEdit" name="droite1">
       <property name="maxLength">
        <number>1</number>
       </property>
      </widget>
     </item>
     <item row="1" column="2">
-     <widget class="QLineEdit" name="lineEdit_l_1">
+     <widget class="QLineEdit" name="gauche1">
       <property name="maxLength">
        <number>1</number>
       </property>
@@ -81,10 +81,10 @@
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QLineEdit" name="lineEdit_n_1"/>
+     <widget class="QLineEdit" name="nom1"/>
     </item>
     <item row="2" column="3">
-     <widget class="QLineEdit" name="lineEdit_r_2">
+     <widget class="QLineEdit" name="droite2">
       <property name="maxLength">
        <number>1</number>
       </property>
@@ -132,6 +132,16 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>nom1</tabstop>
+  <tabstop>gauche1</tabstop>
+  <tabstop>droite1</tabstop>
+  <tabstop>nom2</tabstop>
+  <tabstop>gauche2</tabstop>
+  <tabstop>droite2</tabstop>
+  <tabstop>pushButton_valid</tabstop>
+  <tabstop>pushButton_annul</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -167,4 +177,7 @@
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>test()</slot>
+ </slots>
 </ui>

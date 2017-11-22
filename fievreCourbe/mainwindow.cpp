@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     layout = new QHBoxLayout();
     game_win = new GameWindow(this, width, height);
     layout->addWidget(game_win);
-    sb = new ScoreBoard(this);
+    sb = new ScoreBoard(this, game_win->getSnakes());
     layout->addWidget(sb);
 
 
@@ -44,8 +44,6 @@ void MainWindow::showConfig () {
 
 void MainWindow::makeSnakes()
 {
-    qDebug() << "make snakes";
-    //recuperer les infos de dialogconfig
-    //a transmettre a game_win
+    //game_win->updateSnake(dialogConfig->getInfo());
 }
 

@@ -16,6 +16,9 @@ public:
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent * event);
     void createSnakes();
+    std::vector<Snake*>* getSnakes();
+    void updateSnake(QGridLayout layout);
+
 private:
     void toPlaceSnakesOnScene();
     void toRemoveSnakesOnScene();

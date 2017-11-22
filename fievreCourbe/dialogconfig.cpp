@@ -14,3 +14,9 @@ DialogConfig::~DialogConfig()
 {
     delete ui;
 }
+/*
+QGridLayout DialogConfig::getInfo()
+{
+    return ui->gridLayout;
+}
+*/

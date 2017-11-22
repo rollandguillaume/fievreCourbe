@@ -2,6 +2,7 @@
 #define DIALOGCONFIG_H
 
 #include <QDialog>
+#include <QLayout>
 
 namespace Ui {
 class DialogConfig;
@@ -14,6 +15,7 @@ class DialogConfig : public QDialog
 public:
     explicit DialogConfig(QWidget *parent = 0);
     ~DialogConfig();
+    QGridLayout getInfo();
 
 private:
     Ui::DialogConfig *ui;
