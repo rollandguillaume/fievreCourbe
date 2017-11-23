@@ -2,12 +2,16 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <dialog_help.h>
+#include <QDebug>
 #include <QStackedWidget>
-#include <dialogconfig.h>
-#include <gamewindow.h>
-#include <scoreboard.h>
 #include <QComboBox>
+
+#include <iostream>
+
+#include "dialog_help.h"
+#include "gamewindow.h"
+#include "startwindow.h"
+#include "scoreboard.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,15 +28,14 @@ public:
 private:
     Ui::MainWindow *ui;
     Dialog_help *dialog_help;
-    DialogConfig *dialogConfig;
     GameWindow *game_win;
-    QLayout *layout;
+    StartWindow *start_win;
     ScoreBoard *sb;
+    QLayout *layout;
 
 public slots:
+    void start();
     void dialogHelp();
-    void showConfig();
-    void makeSnakes();
 };
 
 #endif // MAINWINDOW_H

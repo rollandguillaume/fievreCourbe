@@ -1,32 +1,43 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDebug>
-#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // Set the quit action : close the game (Ctrl+Shift+Q)
     QObject::connect(ui->action_quit , SIGNAL(triggered(bool)), qApp, SLOT(quit()));
+    // Set the new action : restart a new game (Ctrl+Shift+N)
+    QObject::connect(ui->action_new, SIGNAL(triggered(bool)), game_win, SLOT(initPart()));
+    // Help dialog : shows the instructions of the game (Ctrl+Shift+H)
     dialog_help = new Dialog_help(this);
-    dialogConfig = new DialogConfig(this);
 
+    // Initialize the startWindow where you configure the game
+    start_win = new StartWindow();
+
+    this->setCentralWidget(start_win);
+}
+
+void MainWindow::start()
+{
     int width = 500;
     int height = 500;
 
-    layout = new QHBoxLayout();
+    // Configure the GameWindow and the ScoreBoard
     game_win = new GameWindow(this, width, height);
-    layout->addWidget(game_win);
     sb = new ScoreBoard(this, game_win->getSnakes());
-    layout->addWidget(sb);
 
+    // The layout that will contain the GameWindow and the ScoreBoard
+    layout = new QHBoxLayout();
+    layout->addWidget(game_win);
+    layout->addWidget(sb);
 
     this->centralWidget()->setLayout(layout);
 
+    // Setting of the window size so it shows all the GameWindow
     setFixedSize(sb->width()+game_win->width()+layout->margin(), game_win->height()+ui->menubar->height()+layout->margin()*2);
 
-    QObject::connect(ui->action_new, SIGNAL(triggered(bool)), game_win, SLOT(initPart()));
 }
 
 MainWindow::~MainWindow()
@@ -36,14 +47,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::dialogHelp () {
     dialog_help->show();
-}
-
-void MainWindow::showConfig () {
-    dialogConfig->show();
-}
-
-void MainWindow::makeSnakes()
-{
-    //game_win->updateSnake(dialogConfig->getInfo());
 }
 

@@ -37,7 +37,6 @@
      <string>&amp;File</string>
     </property>
     <addaction name="action_new"/>
-    <addaction name="action_config"/>
     <addaction name="separator"/>
     <addaction name="action_quit"/>
    </widget>
@@ -56,14 +55,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+Q</string>
-   </property>
-  </action>
-  <action name="action_config">
-   <property name="text">
-    <string>&amp;Config</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Shift+C</string>
    </property>
   </action>
   <action name="action_Help">
@@ -90,22 +81,6 @@
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>dialogHelp()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>257</x>
-     <y>185</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_config</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>showConfig()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>

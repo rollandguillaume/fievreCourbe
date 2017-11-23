@@ -9,24 +9,24 @@ SOURCES += \
     mainwindow.cpp \
     dialog_help.cpp \
     gamewindow.cpp \
-    dialogconfig.cpp \
     snake.cpp \
     scoreboard.cpp \
     wall.cpp \
-    config.cpp
+    config.cpp \
+    startwindow.cpp
 
 HEADERS += \
     mainwindow.h \
     dialog_help.h \
     gamewindow.h \
-    dialogconfig.h \
     snake.h \
     scoreboard.h \
     wall.h \
-    config.h
+    config.h \
+    startwindow.h
 
 FORMS += \
     mainwindow.ui \
     dialog_help.ui \
-    dialogconfig.ui \
-    scoreboard.ui
+    scoreboard.ui \
+    startwindow.ui
