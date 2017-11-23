@@ -40,7 +40,7 @@ public slots:
 
 private:
     void rotation();
-    std::vector<int> checkDirection();
+    std::pair<int, int>* checkDirection();
     void commitSuicide();
 
 public:
@@ -63,6 +63,9 @@ private:
     bool life;
     QGraphicsScene * scene;
     QString couleur;
+
+    QPainterPath * pathCourbe;
+    QPainter * courbe;
 
 };
 

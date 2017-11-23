@@ -101,7 +101,7 @@ void GameWindow::createSnakes()
     snakes.push_back(new Snake(QString("Joueur 2")));
     snakes[1]->setKeyOnRight("s");
     snakes[1]->setKeyOnLeft("q");
-    snakes[1]->setColor("purple");
+    snakes[1]->setColor("red");
 
 
     int size = snakes.size();

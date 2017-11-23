@@ -42,9 +42,9 @@ void Snake::move()
             int width = Config::WIDTH; //TODO a trouver ailleur : une classe Config Static ??
             int height = Config::HEIGHT;
 
-            std::vector<int> dir = checkDirection();
-            int lr = dir[0];
-            int hb = dir[1];
+            std::pair<int, int> * dir = checkDirection();
+            int lr = dir->first;
+            int hb = dir->second;
 
             int boundWidth = boundingRect().width()/2;
             int boundHeight = boundingRect().height()/2;
@@ -91,7 +91,7 @@ void Snake::rotation()
 
 }
 
-std::vector<int> Snake::checkDirection()
+std::pair<int, int>* Snake::checkDirection()
 {
     int ret = -1;
     int ret2 = -1;
@@ -107,12 +107,8 @@ std::vector<int> Snake::checkDirection()
     } else {
         ret2 = Snake::BAS;
     }
-    std::vector<int> vect;
-    vect.push_back(ret);
-    vect.push_back(ret2);
 
-
-    return vect;
+    return new std::pair<int,int>(ret, ret2);
 }
 
 void Snake::commitSuicide()
