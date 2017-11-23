@@ -2,6 +2,7 @@
 #define STARTWINDOW_H
 
 #include <QWidget>
+#include <QLabel>
 
 namespace Ui {
 class StartWindow;
@@ -17,6 +18,11 @@ public:
 
 private:
     Ui::StartWindow *ui;
+    void addJoueur();
+    void deleteJoueur(int index);
+
+private:
+    std::vector<QString*> joueurs;
 };
 
 #endif // STARTWINDOW_H
