@@ -1,11 +1,4 @@
 #include "snake.h"
-#include <iostream>
-#include <QKeyEvent>
-#include <math.h>
-#include <QBrush>
-#include <QPen>
-#include "config.h"
-
 
 #include <QDebug>
 
@@ -13,7 +6,6 @@ Snake::Snake(QString name)
 {
     this->name = name;
     this->score = 0;
-    this->setRect(0,0,Config::SIZE_SNAKE, Config::SIZE_SNAKE);
     this->step = 1;
 
     this->setBrush(QBrush(Qt::yellow));
@@ -24,6 +16,11 @@ Snake::Snake(QString name)
     this->angle = 2;
     this->direction = 0;
     life = true;
+    setColor(QString("white"));
+//    head = new QGraphicsEllipseItem();
+    this->setRect(0,0,Config::SIZE_SNAKE, Config::SIZE_SNAKE);
+    setZValue(1);
+
 }
 
 void Snake::move()
@@ -42,24 +39,28 @@ void Snake::move()
 
         } else {
             // Gestion sortie fenetre des serpents
-            int width = 500; //TODO a trouver ailleur : une classe Config Static ??
-            int height = 500;
+            int width = Config::WIDTH; //TODO a trouver ailleur : une classe Config Static ??
+            int height = Config::HEIGHT;
 
             std::vector<int> dir = checkDirection();
             int lr = dir[0];
             int hb = dir[1];
 
-            if (x2<=0 && lr==Snake::GAUCHE) {
-                x2 += width-boundingRect().width();
-            } else if (x2+boundingRect().width() >= width && lr==Snake::DROITE) {
-                x2 -= width-boundingRect().width();
+            int boundWidth = boundingRect().width()/2;
+            int boundHeight = boundingRect().height()/2;
+
+            if (x2<=-boundWidth && lr==Snake::GAUCHE) {
+                x2 += width;
+            } else if (x2+boundWidth >= width && lr==Snake::DROITE) {
+                x2 -= width;
             }
-            if (y2<=0 && hb==Snake::HAUT) {
-                y2 += height-boundingRect().height();
-            } else if (y2+boundingRect().height() >= height && hb==Snake::BAS) {
-                y2 -= height-boundingRect().height();
+            if (y2<=-boundHeight && hb==Snake::HAUT) {
+                y2 += height;
+            } else if (y2+boundHeight >= height && hb==Snake::BAS) {
+                y2 -= height;
             }
 
+            addTrace();
             //new pos of snake
             setPos(x2, y2);
         }
@@ -167,7 +168,23 @@ int Snake::getKeyOnLeft() const
 
 bool Snake::checkColisions()
 {
-    return (collidingItems().size() > 0) ;
+    QList<QGraphicsItem *> list = collidingItems();
+    int p = 0;
+
+    foreach(QGraphicsItem * i , list)
+    {
+        Snake * item= dynamic_cast<Snake*>(i);
+        if (item)
+        {
+            //if snake type
+            list.removeAt(p);
+        } else {
+            p++;
+        }
+    }
+
+    return false;
+    return (list.size() > 0) ;
 }
 
 bool Snake::isAlive()
@@ -198,6 +215,30 @@ void Snake::resetScore()
 void Snake::addPoint()
 {
     this->score++;
+}
+
+void Snake::setScene(QGraphicsScene *scene)
+{
+    this->scene = scene;
+}
+
+void Snake::setColor(QString color)
+{
+    couleur = color;
+}
+
+void Snake::addTrace()
+{
+    QGraphicsEllipseItem * trace = new QGraphicsEllipseItem();
+
+    trace->setRect(0,0,Config::SIZE_SNAKE, Config::SIZE_SNAKE);
+    trace->setPos(this->x(), this->y());
+    trace->setBrush(QBrush(QColor(couleur)));
+    trace->setPen(QPen(Qt::NoPen));
+
+    scene->addItem(trace);
+
+//    delete trace;
 }
 
 

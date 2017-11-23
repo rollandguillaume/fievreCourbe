@@ -8,7 +8,7 @@ public:
     static const int WIDTH = 500;
     static const int HEIGHT = 500;
     static const int CLOCK = 20;
-    static const int SIZE_SNAKE = 7;
+    static const int SIZE_SNAKE = 6;
 
 };
 

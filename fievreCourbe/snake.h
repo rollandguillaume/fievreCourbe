@@ -1,9 +1,18 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-#include <QThread>
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
+#include <QKeyEvent>
+#include <QBrush>
+#include <QPen>
+#include <QTimer>
+#include <QGraphicsScene>
+
+#include <iostream>
+#include <math.h>
+
+#include "config.h"
 
 class Snake : public QGraphicsEllipseItem
 {
@@ -23,6 +32,11 @@ public:
     int getScore();
     void resetScore();
     void addPoint();
+    void setScene(QGraphicsScene * scene);
+    void setColor(QString color);
+
+public slots:
+    void addTrace();
 
 private:
     void rotation();
@@ -36,6 +50,7 @@ public:
     static const int HAUT = 3;
 
 private:
+//    QGraphicsItem * head;
     QString name;
     int score;
     int step;
@@ -46,6 +61,8 @@ private:
     int keyOnRight;//value of the key to turn on right
     int keyOnLeft;
     bool life;
+    QGraphicsScene * scene;
+    QString couleur;
 
 };
 
