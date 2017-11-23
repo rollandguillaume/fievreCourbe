@@ -21,6 +21,7 @@ Snake::Snake(QString name)
     this->setRect(0,0,Config::SIZE_SNAKE, Config::SIZE_SNAKE);
     setZValue(1);
 
+
 }
 
 void Snake::move()
@@ -49,18 +50,25 @@ void Snake::move()
             int boundWidth = boundingRect().width()/2;
             int boundHeight = boundingRect().height()/2;
 
+            int delta = getSize();
+
             if (x2<=-boundWidth && lr==Snake::GAUCHE) {
                 x2 += width;
+                courbe.moveTo(x2+delta, this->y()+delta);
             } else if (x2+boundWidth >= width && lr==Snake::DROITE) {
                 x2 -= width;
+                courbe.moveTo(x2+delta, this->y()+delta);
             }
             if (y2<=-boundHeight && hb==Snake::HAUT) {
                 y2 += height;
+                courbe.moveTo(this->x()+delta, y2+delta);
             } else if (y2+boundHeight >= height && hb==Snake::BAS) {
                 y2 -= height;
+                courbe.moveTo(this->x()+delta, y2+delta);
             }
 
-            addTrace();
+
+            addTrace(x2, y2);
             //new pos of snake
             setPos(x2, y2);
         }
@@ -216,6 +224,8 @@ void Snake::addPoint()
 void Snake::setScene(QGraphicsScene *scene)
 {
     this->scene = scene;
+    pathCourbe = new QGraphicsPathItem(courbe);
+    scene->addItem(pathCourbe);
 }
 
 void Snake::setColor(QString color)
@@ -223,18 +233,29 @@ void Snake::setColor(QString color)
     couleur = color;
 }
 
-void Snake::addTrace()
+qreal Snake::getSize() const
 {
-    QGraphicsEllipseItem * trace = new QGraphicsEllipseItem();
+    //qd on ajoutera les bonus, il faudra
+    return Config::SIZE_SNAKE;
+}
 
-    trace->setRect(0,0,Config::SIZE_SNAKE, Config::SIZE_SNAKE);
-    trace->setPos(this->x(), this->y());
-    trace->setBrush(QBrush(QColor(couleur)));
-    trace->setPen(QPen(Qt::NoPen));
+void Snake::addTrace(float x, float y)
+{
+    scene->removeItem(pathCourbe);
+    courbe.lineTo(x+getSize()/2,y+getSize()/2);
+//    courbe.lineTo(x,y);
+    pathCourbe = new QGraphicsPathItem(courbe);
+    pathCourbe->setPen(QPen(QBrush(QColor(couleur)), getSize()));
+    scene->addItem(pathCourbe);
 
-    scene->addItem(trace);
+//    this->scene->addPath(courbe, QPen(QBrush(QColor(couleur)), getSize()));
 
-//    delete trace;
+}
+
+void Snake::setPos(float x, float y)
+{
+    //TODO actualiser la position de la courbe en fonction de la pos du snake
+    QGraphicsItem::setPos(x, y);
 }
 
 

@@ -8,6 +8,8 @@
 #include <QPen>
 #include <QTimer>
 #include <QGraphicsScene>
+#include <QGraphicsPathItem>
+#include <QPainterPath>
 
 #include <iostream>
 #include <math.h>
@@ -34,9 +36,9 @@ public:
     void addPoint();
     void setScene(QGraphicsScene * scene);
     void setColor(QString color);
-
-public slots:
-    void addTrace();
+    qreal getSize() const;
+    void addTrace(float x, float y);
+    void setPos(float x, float y);
 
 private:
     void rotation();
@@ -64,8 +66,8 @@ private:
     QGraphicsScene * scene;
     QString couleur;
 
-    QPainterPath * pathCourbe;
-    QPainter * courbe;
+    QPainterPath courbe;
+    QGraphicsPathItem * pathCourbe;
 
 };
 

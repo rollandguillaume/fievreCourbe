@@ -13,7 +13,7 @@ GameWindow::GameWindow(QWidget *parent, int width, int height)
     this->setFixedSize(width, height);
     scene->setSceneRect(0,0,width,height);
 
-    this->setBackgroundBrush(QBrush(Qt::black));
+//    this->setBackgroundBrush(QBrush(Qt::black));
 
     clock = new QTimer();
     connect(clock,SIGNAL(timeout()),this,SLOT(play()));
