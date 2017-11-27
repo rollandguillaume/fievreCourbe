@@ -40,7 +40,17 @@ StartWindow::~StartWindow()
 
 void StartWindow::addJoueur()
 {
-    qDebug() << "test";
+    dialog_key = new Dialog_Key("Gauche", this);
+    int keyLeft = dialog_key->exec();
+    qDebug() << "keyLeft" << keyLeft;
+
+
+
+    dialog_key = new Dialog_Key("Droite", this);
+    int keyRight = dialog_key->exec();
+    qDebug() << "keyRight" << keyRight;
+
+    //Snake *snake = new Snake();
 }
 
 void StartWindow::deleteJoueur(int index)

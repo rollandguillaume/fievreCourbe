@@ -19,8 +19,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::start()
 {
-
-
     int width = 500;
     int height = 500;
 

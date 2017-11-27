@@ -153,7 +153,7 @@ void Snake::setKeyOnLeft(std::__cxx11::string val)
 /**
  * check if the right key is pressing
  * @brief Snake::getKeyOnRight
- * @return
+ * @returnfor
  */
 int Snake::getKeyOnRight() const
 {

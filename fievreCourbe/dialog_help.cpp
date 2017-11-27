@@ -8,6 +8,8 @@ Dialog_help::Dialog_help(QWidget *parent) :
     ui->setupUi(this);
 }
 
+
+
 Dialog_help::~Dialog_help()
 {
     delete ui;

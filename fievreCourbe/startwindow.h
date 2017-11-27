@@ -4,6 +4,9 @@
 #include <QWidget>
 #include <QLabel>
 
+#include "snake.h"
+#include "dialog_key.h"
+
 namespace Ui {
 class StartWindow;
 }
@@ -22,7 +25,8 @@ private:
     void deleteJoueur(int index);
 
 private:
-    std::vector<QString*> joueurs;
+    std::vector<Snake*> * snakes;
+    Dialog_Key *dialog_key;
 };
 
 #endif // STARTWINDOW_H
