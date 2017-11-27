@@ -13,7 +13,6 @@ SOURCES += \
     wall.cpp \
     config.cpp \
     startwindow.cpp \
-    dialog_joueur.cpp \
     dialog_key.cpp
 
 HEADERS += \
@@ -25,7 +24,6 @@ HEADERS += \
     wall.h \
     config.h \
     startwindow.h \
-    dialog_joueur.h \
     dialog_key.h
 
 FORMS += \
@@ -33,5 +31,4 @@ FORMS += \
     dialog_help.ui \
     scoreboard.ui \
     startwindow.ui \
-    dialog_joueur.ui \
     dialog_key.ui

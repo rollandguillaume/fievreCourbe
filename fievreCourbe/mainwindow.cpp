@@ -14,32 +14,28 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize the startWindow where you configure the game
     start_win = new StartWindow(this);
 
+    //layout = new QHBoxLayout();
+    //layout->addWidget(start_win);
+
     this->setCentralWidget(start_win);
 }
 
 void MainWindow::start()
 {
-
     int width = Config::WIDTH;
     int height = Config::HEIGHT;
 
 
     // Configure the GameWindow and the ScoreBoard
     game_win = new GameWindow(this, width, height);
-    sb = new ScoreBoard(this, game_win->getSnakes());
 
     // Set the new action : restart a new game (Ctrl+Shift+N)
     QObject::connect(ui->action_new, SIGNAL(triggered(bool)), game_win, SLOT(initPart()));
 
-    // The layout that will contain the GameWindow and the ScoreBoard
-    layout = new QHBoxLayout();
-    layout->addWidget(game_win);
-    layout->addWidget(sb);
-
-    this->centralWidget()->setLayout(layout);
+    this->setCentralWidget(game_win);
 
     // Setting of the window size so it shows all the GameWindow
-    setFixedSize(sb->width()+game_win->width()+layout->margin(), game_win->height()+ui->menubar->height()+layout->margin()*2);
+    setFixedSize(game_win->width(), game_win->height()+ui->menubar->height());
 
 }
 

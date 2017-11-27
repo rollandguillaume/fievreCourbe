@@ -1,7 +1,5 @@
 #include "gamewindow.h"
 
-#include <QDebug>
-
 GameWindow::GameWindow(QWidget *parent, int width, int height)
     : QGraphicsView(parent)
 {
@@ -81,6 +79,10 @@ void GameWindow::toPlaceSnakesOnScene()
     //give a random position
     snakes[0]->setPosInit(30, 40);
     snakes[1]->setPosInit(50, 100);
+    snakes[2]->setPosInit(70, 40);
+    snakes[3]->setPosInit(90, 100);
+    snakes[4]->setPosInit(110, 40);
+    snakes[5]->setPosInit(130, 100);
 
     //to place all snakes
     int size = snakes.size();
@@ -101,6 +103,22 @@ void GameWindow::createSnakes()
     snakes[1]->setKeyOnRight("s");
     snakes[1]->setKeyOnLeft("q");
     snakes[1]->setColor("red");
+    snakes.push_back(new Snake(QString("Joueur 1")));
+    snakes[2]->setKeyOnRight("3");
+    snakes[2]->setKeyOnLeft("2");
+    snakes[2]->setColor("purple");
+    snakes.push_back(new Snake(QString("Joueur 2")));
+    snakes[3]->setKeyOnRight("s");
+    snakes[3]->setKeyOnLeft("q");
+    snakes[3]->setColor("blue");
+    snakes.push_back(new Snake(QString("Joueur 1")));
+    snakes[4]->setKeyOnRight("3");
+    snakes[4]->setKeyOnLeft("2");
+    snakes[4]->setColor("green");
+    snakes.push_back(new Snake(QString("Joueur 2")));
+    snakes[5]->setKeyOnRight("s");
+    snakes[5]->setKeyOnLeft("q");
+    snakes[5]->setColor("grey");
 
 
     int size = snakes.size();
@@ -125,14 +143,15 @@ void GameWindow::toRemoveSnakesOnScene()
 
 void GameWindow::erectWalls()
 {
-    int width = 500;
-    int height = 500;
-    int wallSize = 5;
+    int width = Config::WIDTH;
+    int height = Config::HEIGHT;
+    int wallSize = Config::WALL_SIZE;
     if(walls.size()==0){
         walls.push_back(new Wall(0, 0, wallSize, height));
+        walls.push_back(new Wall(0, 0, width, wallSize));
+
         walls.push_back(new Wall(width-wallSize, 0, wallSize, height));
         walls.push_back(new Wall(0, height-wallSize, width, wallSize));
-        walls.push_back(new Wall(0, 0, width, wallSize));
     }
 
     int size = walls.size();

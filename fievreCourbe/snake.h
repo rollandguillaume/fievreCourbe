@@ -42,7 +42,7 @@ public:
 
 private:
     void rotation();
-    std::pair<int, int>* checkDirection();
+    std::pair<int, int> * checkDirection();
     void commitSuicide();
 
 public:

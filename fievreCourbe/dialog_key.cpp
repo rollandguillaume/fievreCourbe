@@ -1,8 +1,6 @@
 #include "dialog_key.h"
 #include "ui_dialog_key.h"
 
-#include <QDebug>
-
 Dialog_Key::Dialog_Key(QString label, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog_Key)

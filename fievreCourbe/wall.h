@@ -5,7 +5,6 @@
 #include <QBrush>
 #include <QPen>
 
-
 class Wall : public QGraphicsRectItem
 {
 public:

@@ -3,23 +3,25 @@
 
 #include <QWidget>
 #include <QtGui>
+#include <QTimer>
+#include <QBrush>
+
+#include <iostream>
+
 #include "snake.h"
 #include "wall.h"
-#include <QTimer>
-#include <iostream>
-#include <QBrush>
 
 class GameWindow : public QGraphicsView
 {
     Q_OBJECT
 
 public:
-    GameWindow(QWidget *parent = 0, int width = 500, int height = 500);
+    GameWindow(QWidget * parent = 0, int width = Config::WIDTH, int height = Config::HEIGHT);
     ~GameWindow();
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent * event);
     void createSnakes();
-    std::vector<Snake*>* getSnakes();
+    std::vector<Snake*> * getSnakes();
     void updateSnake(QGridLayout layout);
 
 private:

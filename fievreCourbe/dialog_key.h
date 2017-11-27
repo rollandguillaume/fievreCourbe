@@ -17,12 +17,9 @@ public:
     ~Dialog_Key();
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent * event);
-    int waitKey();
 
 private:
     Ui::Dialog_Key *ui;
-    int key;
-    bool isKeySet;
 };
 
 #endif // DIALOG_KEY_H
