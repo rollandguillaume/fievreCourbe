@@ -25,7 +25,7 @@ private:
     void deleteJoueur(int index);
 
 private:
-    std::vector<Snake*> * snakes;
+    std::vector<Snake*> *snakes;
     Dialog_Key *dialog_key;
 };
 
