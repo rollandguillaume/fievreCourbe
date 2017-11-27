@@ -13,7 +13,7 @@ GameWindow::GameWindow(QWidget *parent, int width, int height)
     this->setFixedSize(width, height);
     scene->setSceneRect(0,0,width,height);
 
-//    this->setBackgroundBrush(QBrush(Qt::black));
+    this->setBackgroundBrush(QBrush(Qt::black));
 
     clock = new QTimer();
     connect(clock,SIGNAL(timeout()),this,SLOT(play()));
@@ -79,8 +79,8 @@ void GameWindow::initPart()
 void GameWindow::toPlaceSnakesOnScene()
 {
     //give a random position
-    snakes[0]->setPos(30, 40);
-    snakes[1]->setPos(50, 100);
+    snakes[0]->setPosInit(30, 40);
+    snakes[1]->setPosInit(50, 100);
 
     //to place all snakes
     int size = snakes.size();
@@ -92,7 +92,6 @@ void GameWindow::toPlaceSnakesOnScene()
 void GameWindow::createSnakes()
 {
     snakes.clear();
-
 
     snakes.push_back(new Snake(QString("Joueur 1")));
     snakes[0]->setKeyOnRight("3");

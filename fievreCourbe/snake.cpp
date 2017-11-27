@@ -21,6 +21,7 @@ Snake::Snake(QString name)
     this->setRect(0,0,Config::SIZE_SNAKE, Config::SIZE_SNAKE);
     setZValue(1);
 
+    this->compteurPrint = Config::COMPTEUR_PRINT;
 
 }
 
@@ -40,7 +41,7 @@ void Snake::move()
 
         } else {
             // Gestion sortie fenetre des serpents
-            int width = Config::WIDTH; //TODO a trouver ailleur : une classe Config Static ??
+            int width = Config::WIDTH;
             int height = Config::HEIGHT;
 
             std::pair<int, int> * dir = checkDirection();
@@ -50,27 +51,36 @@ void Snake::move()
             int boundWidth = boundingRect().width()/2;
             int boundHeight = boundingRect().height()/2;
 
-            int delta = getSize();
+            int delta = getSize()/2;
 
             if (x2<=-boundWidth && lr==Snake::GAUCHE) {
                 x2 += width;
                 courbe.moveTo(x2+delta, this->y()+delta);
+                qDebug()<<"gauche";
             } else if (x2+boundWidth >= width && lr==Snake::DROITE) {
                 x2 -= width;
+                qDebug()<<"droite";
                 courbe.moveTo(x2+delta, this->y()+delta);
             }
             if (y2<=-boundHeight && hb==Snake::HAUT) {
                 y2 += height;
+                qDebug()<<"haut";
                 courbe.moveTo(this->x()+delta, y2+delta);
             } else if (y2+boundHeight >= height && hb==Snake::BAS) {
                 y2 -= height;
+                qDebug()<<"bas";
                 courbe.moveTo(this->x()+delta, y2+delta);
             }
 
-
-            addTrace(x2, y2);
             //new pos of snake
             setPos(x2, y2);
+
+            if (this->compteurPrint <= 0) {
+                addTrace();
+                this->compteurPrint = Config::COMPTEUR_PRINT;
+            } else {
+                this->compteurPrint--;
+            }
         }
     }
 
@@ -239,23 +249,23 @@ qreal Snake::getSize() const
     return Config::SIZE_SNAKE;
 }
 
-void Snake::addTrace(float x, float y)
+void Snake::addTrace()
 {
     scene->removeItem(pathCourbe);
-    courbe.lineTo(x+getSize()/2,y+getSize()/2);
-//    courbe.lineTo(x,y);
+    courbe.lineTo(this->x()+getSize()/2,this->y()+getSize()/2);
     pathCourbe = new QGraphicsPathItem(courbe);
     pathCourbe->setPen(QPen(QBrush(QColor(couleur)), getSize()));
     scene->addItem(pathCourbe);
 
-//    this->scene->addPath(courbe, QPen(QBrush(QColor(couleur)), getSize()));
-
 }
 
-void Snake::setPos(float x, float y)
+void Snake::setPosInit(float x, float y)
 {
     //TODO actualiser la position de la courbe en fonction de la pos du snake
     QGraphicsItem::setPos(x, y);
+
+    this->courbe.moveTo(x+getSize()/2,y+getSize()/2);
+
 }
 
 

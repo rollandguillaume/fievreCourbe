@@ -21,8 +21,8 @@ void MainWindow::start()
 {
 
 
-    int width = 500;
-    int height = 500;
+    int width = Config::WIDTH;
+    int height = Config::HEIGHT;
 
     // Configure the GameWindow and the ScoreBoard
     game_win = new GameWindow(this, width, height);

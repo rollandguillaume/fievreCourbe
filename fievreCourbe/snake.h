@@ -37,8 +37,8 @@ public:
     void setScene(QGraphicsScene * scene);
     void setColor(QString color);
     qreal getSize() const;
-    void addTrace(float x, float y);
-    void setPos(float x, float y);
+    void addTrace();
+    void setPosInit(float x, float y);
 
 private:
     void rotation();
@@ -65,6 +65,7 @@ private:
     bool life;
     QGraphicsScene * scene;
     QString couleur;
+    int compteurPrint;
 
     QPainterPath courbe;
     QGraphicsPathItem * pathCourbe;
