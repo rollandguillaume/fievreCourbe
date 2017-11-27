@@ -1,7 +1,6 @@
 QT += widgets
 QT += gui
 QT += core
-CONFIG += console
 
 
 SOURCES += \

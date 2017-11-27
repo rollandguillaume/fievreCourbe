@@ -5,6 +5,9 @@
 #include <QtGui>
 #include "snake.h"
 #include "wall.h"
+#include <QTimer>
+#include <iostream>
+#include <QBrush>
 
 class GameWindow : public QGraphicsView
 {

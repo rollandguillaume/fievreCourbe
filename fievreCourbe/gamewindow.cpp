@@ -1,7 +1,4 @@
 #include "gamewindow.h"
-#include <QTimer>
-#include <iostream>
-#include <QBrush>
 
 #include <QDebug>
 
@@ -22,7 +19,6 @@ GameWindow::GameWindow(QWidget *parent, int width, int height)
     connect(clock,SIGNAL(timeout()),this,SLOT(play()));
 
     initPart();
-
 
 }
 
@@ -83,8 +79,8 @@ void GameWindow::initPart()
 void GameWindow::toPlaceSnakesOnScene()
 {
     //give a random position
-    snakes[0]->setPos(30, 40);
-    snakes[1]->setPos(50, 100);
+    snakes[0]->setPosInit(30, 40);
+    snakes[1]->setPosInit(50, 100);
 
     //to place all snakes
     int size = snakes.size();
@@ -97,15 +93,21 @@ void GameWindow::createSnakes()
 {
     snakes.clear();
 
-
     snakes.push_back(new Snake(QString("Joueur 1")));
-
     snakes[0]->setKeyOnRight("3");
     snakes[0]->setKeyOnLeft("2");
+    snakes[0]->setColor("orange");
     snakes.push_back(new Snake(QString("Joueur 2")));
-
     snakes[1]->setKeyOnRight("s");
     snakes[1]->setKeyOnLeft("q");
+    snakes[1]->setColor("red");
+
+
+    int size = snakes.size();
+    for (int s = 0; s < size; s++) {
+        snakes[s]->setScene(scene);;
+    }
+
 }
 
 std::vector<Snake*>* GameWindow::getSnakes()
@@ -150,11 +152,10 @@ void GameWindow::destroyWalls()
 
 void GameWindow::play()
 {
-//    int size = snakes.size();
-//    for (int s = 0; s < size; s++) {
-//        snakes[s]->move();
-//    }
-            snakes[0]->move();
+    int size = snakes.size();
+    for (int s = 0; s < size; s++) {
+        snakes[s]->move();
+    }
 
 }
 

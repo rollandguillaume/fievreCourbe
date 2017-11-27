@@ -2,6 +2,8 @@
 #define WALL_H
 
 #include <QGraphicsRectItem>
+#include <QBrush>
+#include <QPen>
 
 
 class Wall : public QGraphicsRectItem
