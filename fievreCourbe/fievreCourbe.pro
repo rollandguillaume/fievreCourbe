@@ -2,7 +2,6 @@ QT += widgets
 QT += gui
 QT += core
 
-
 SOURCES += \
     main.cpp \
     mainwindow.cpp \

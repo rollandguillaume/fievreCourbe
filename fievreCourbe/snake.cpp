@@ -56,19 +56,15 @@ void Snake::move()
             if (x2<=-boundWidth && lr==Snake::GAUCHE) {
                 x2 += width;
                 courbe.moveTo(x2+delta, this->y()+delta);
-                qDebug()<<"gauche";
             } else if (x2+boundWidth >= width && lr==Snake::DROITE) {
                 x2 -= width;
-                qDebug()<<"droite";
                 courbe.moveTo(x2+delta, this->y()+delta);
             }
             if (y2<=-boundHeight && hb==Snake::HAUT) {
                 y2 += height;
-                qDebug()<<"haut";
                 courbe.moveTo(this->x()+delta, y2+delta);
             } else if (y2+boundHeight >= height && hb==Snake::BAS) {
                 y2 -= height;
-                qDebug()<<"bas";
                 courbe.moveTo(this->x()+delta, y2+delta);
             }
 
@@ -182,22 +178,35 @@ int Snake::getKeyOnLeft() const
 
 bool Snake::checkColisions()
 {
+    qDebug()<<"check Colision"<<name;
+
     QList<QGraphicsItem *> list = collidingItems();
     int p = 0;
 
     foreach(QGraphicsItem * i , list)
     {
-        Snake * item= dynamic_cast<Snake*>(i);
+        Snake * item = dynamic_cast<Snake*>(i);
         if (item)
         {
             //if snake type
             list.removeAt(p);
         } else {
-            p++;
+            QGraphicsPathItem * itemPath = dynamic_cast<QGraphicsPathItem*>(i);
+            if (itemPath) {
+                //et si position de itemPath en direction oppose vers laquelle je vais
+                if (itemPath == pathCourbe) {//si est ma courbe
+                    qDebug()<<"egale";
+
+                    list.removeAt(p);
+                } else {
+                    p++;//sinon passer au suivant
+                }
+            } else {
+                p++;//sinon passer au suivant
+            }
         }
     }
 
-    return false;
     return (list.size() > 0) ;
 }
 
@@ -252,9 +261,18 @@ qreal Snake::getSize() const
 void Snake::addTrace()
 {
     scene->removeItem(pathCourbe);
-    courbe.lineTo(this->x()+getSize()/2,this->y()+getSize()/2);
+
+    int delta = getSize()/2;
+    float x2 = this->x()+delta;
+    float y2 = this->y()+delta;
+
+//    float radToDeg = (direction+180) * M_PI / 180;
+//    float x3 = x2+delta*cos(radToDeg);
+//    float y3 = y2+delta*sin(radToDeg);
+
+    courbe.lineTo(x2, y2);
     pathCourbe = new QGraphicsPathItem(courbe);
-    pathCourbe->setPen(QPen(QBrush(QColor(couleur)), getSize()));
+    pathCourbe->setPen(QPen(QBrush(QColor(couleur)), getSize(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     scene->addItem(pathCourbe);
 
 }
@@ -266,6 +284,13 @@ void Snake::setPosInit(float x, float y)
 
     this->courbe.moveTo(x+getSize()/2,y+getSize()/2);
 
+}
+
+void Snake::clearPath()
+{
+    //TODO
+    scene->removeItem(pathCourbe);
+    courbe = QPainterPath();
 }
 
 

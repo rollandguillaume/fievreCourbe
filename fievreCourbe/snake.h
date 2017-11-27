@@ -39,6 +39,7 @@ public:
     qreal getSize() const;
     void addTrace();
     void setPosInit(float x, float y);
+    void clearPath();
 
 private:
     void rotation();

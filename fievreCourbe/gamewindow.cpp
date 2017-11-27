@@ -89,6 +89,7 @@ void GameWindow::toPlaceSnakesOnScene()
     for (int s = 0; s < size; s++) {
         scene->addItem(snakes[s]);
     }
+
 }
 
 void GameWindow::createSnakes()
@@ -103,19 +104,19 @@ void GameWindow::createSnakes()
     snakes[1]->setKeyOnRight("s");
     snakes[1]->setKeyOnLeft("q");
     snakes[1]->setColor("red");
-    snakes.push_back(new Snake(QString("Joueur 1")));
+    snakes.push_back(new Snake(QString("Joueur 3")));
     snakes[2]->setKeyOnRight("3");
     snakes[2]->setKeyOnLeft("2");
     snakes[2]->setColor("purple");
-    snakes.push_back(new Snake(QString("Joueur 2")));
+    snakes.push_back(new Snake(QString("Joueur 4")));
     snakes[3]->setKeyOnRight("s");
     snakes[3]->setKeyOnLeft("q");
     snakes[3]->setColor("blue");
-    snakes.push_back(new Snake(QString("Joueur 1")));
+    snakes.push_back(new Snake(QString("Joueur 5")));
     snakes[4]->setKeyOnRight("3");
     snakes[4]->setKeyOnLeft("2");
     snakes[4]->setColor("green");
-    snakes.push_back(new Snake(QString("Joueur 2")));
+    snakes.push_back(new Snake(QString("Joueur 6")));
     snakes[5]->setKeyOnRight("s");
     snakes[5]->setKeyOnLeft("q");
     snakes[5]->setColor("grey");
@@ -138,6 +139,7 @@ void GameWindow::toRemoveSnakesOnScene()
     int size = snakes.size();
     for (int s = 0; s < size; s++) {
         scene->removeItem(snakes[s]);
+        snakes[s]->clearPath();
     }
 }
 
