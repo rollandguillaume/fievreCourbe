@@ -9,7 +9,7 @@ public:
     static const int HEIGHT = 500;
     static const int CLOCK = 20;
     static const int SIZE_SNAKE = 20;
-    static const int COMPTEUR_PRINT = 12;
+    static const int COMPTEUR_PRINT = 10;
     static const int WALL_SIZE = 5;
 
 };

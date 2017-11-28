@@ -23,6 +23,10 @@ Snake::Snake(QString name)
 
     this->compteurPrint = Config::COMPTEUR_PRINT;
 
+    for (int i = 0; i < 5 ; i++) {
+        CorpsSnake * item = new CorpsSnake(Config::SIZE_SNAKE);
+        corps.push_back(item);
+    }
 }
 
 void Snake::move()
@@ -178,31 +182,35 @@ int Snake::getKeyOnLeft() const
 
 bool Snake::checkColisions()
 {
-    qDebug()<<"check Colision"<<name;
-
     QList<QGraphicsItem *> list = collidingItems();
     int p = 0;
 
     foreach(QGraphicsItem * i , list)
     {
-        Snake * item = dynamic_cast<Snake*>(i);
-        if (item)
-        {
-            //if snake type
+        QGraphicsPathItem * path = dynamic_cast<QGraphicsPathItem*>(i);
+        if (path) {
+            qDebug()<<name;
+            qDebug()<<"pathitem";
+            path->setBrush(QBrush(QColor(QString("black"))));
             list.removeAt(p);
         } else {
-            QGraphicsPathItem * itemPath = dynamic_cast<QGraphicsPathItem*>(i);
-            if (itemPath) {
-                //et si position de itemPath en direction oppose vers laquelle je vais
-                if (itemPath == pathCourbe) {//si est ma courbe
-                    qDebug()<<"egale";
-
+            CorpsSnake * itemCorps = dynamic_cast<CorpsSnake*>(i);
+            if (itemCorps) {
+                int size = corps.size();
+                for (int i = 0; i < size ; i++) {
+                    if (itemCorps == corps[i]) {
+                        list.removeAt(p);
+                    }
+                }
+            } else {
+                Snake * item = dynamic_cast<Snake*>(i);
+                if (item)
+                {
+                    //if snake type : ignore
                     list.removeAt(p);
                 } else {
                     p++;//sinon passer au suivant
                 }
-            } else {
-                p++;//sinon passer au suivant
             }
         }
     }
@@ -250,6 +258,15 @@ void Snake::setScene(QGraphicsScene *scene)
 void Snake::setColor(QString color)
 {
     couleur = color;
+
+    int size = corps.size();
+    for (int i = 0; i < size ; i++) {
+        CorpsSnake * item = dynamic_cast<CorpsSnake*>(corps[i]);
+        if (item) {
+            item->setBrush(QBrush(QColor(QString("pink"))));
+            item->setPen(QPen(Qt::NoPen));
+        }
+    }
 }
 
 qreal Snake::getSize() const
@@ -260,38 +277,69 @@ qreal Snake::getSize() const
 
 void Snake::addTrace()
 {
+    bodyFollowHead();
+    float xpos = corps.back()->x();
+    float ypos = corps.back()->y();
+
     scene->removeItem(pathCourbe);
-
-    int delta = getSize()/2;
-    float x2 = this->x()+delta;
-    float y2 = this->y()+delta;
-
-//    float radToDeg = (direction+180) * M_PI / 180;
-//    float x3 = x2+delta*cos(radToDeg);
-//    float y3 = y2+delta*sin(radToDeg);
-
-    courbe.lineTo(x2, y2);
+    courbe.lineTo(xpos+getSize()/2, ypos+getSize()/2);
     pathCourbe = new QGraphicsPathItem(courbe);
     pathCourbe->setPen(QPen(QBrush(QColor(couleur)), getSize(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     scene->addItem(pathCourbe);
-
 }
 
 void Snake::setPosInit(float x, float y)
 {
     //TODO actualiser la position de la courbe en fonction de la pos du snake
     QGraphicsItem::setPos(x, y);
-
-    this->courbe.moveTo(x+getSize()/2,y+getSize()/2);
+    traceCorps();
+    float xpos = corps[corps.size()-1]->x();
+    float ypos = corps[corps.size()-1]->y();
+    this->courbe.moveTo(xpos+getSize()/2,ypos+getSize()/2);
 
 }
 
 void Snake::clearPath()
 {
-    //TODO
     scene->removeItem(pathCourbe);
+    //TODO besoin de delete courbe avant ??
     courbe = QPainterPath();
+    int size = corps.size();
+    for (int c = 0; c < size; c++) {
+        scene->removeItem(corps[c]);
+    }
 }
+
+void Snake::traceCorps()
+{
+    int r = getSize()/2;
+    int xCHead = x() + getSize()/2;
+    int yCHead = y() + getSize()/2;
+    float radToDeg = (direction+180) * M_PI / 180;
+
+    int size = corps.size();
+    float x3 = xCHead+r*cos(radToDeg);
+    float y3 = yCHead+r*sin(radToDeg);
+    for (int c = 0; c < size; c++) {
+        QGraphicsEllipseItem * item = dynamic_cast<QGraphicsEllipseItem*>(corps[c]);
+        if (item) {
+            item->setPos(x3-r,y3-r);
+            x3 = x3+r*cos(radToDeg);
+            y3 = y3+r*sin(radToDeg);
+            scene->addItem(corps[c]);
+        }
+    }
+}
+
+void Snake::bodyFollowHead()
+{
+    CorpsSnake * co = corps.back();
+    corps.pop_back();
+    co->setPos(x(),y());
+    corps.insert(corps.begin(), co);
+}
+
+
 
 
 

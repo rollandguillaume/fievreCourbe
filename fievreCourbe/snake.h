@@ -15,6 +15,7 @@
 #include <math.h>
 
 #include "config.h"
+#include "corpssnake.h"
 
 class Snake : public QGraphicsEllipseItem
 {
@@ -40,6 +41,8 @@ public:
     void addTrace();
     void setPosInit(float x, float y);
     void clearPath();
+    void traceCorps();
+    void bodyFollowHead();
 
 private:
     void rotation();
@@ -54,6 +57,7 @@ public:
 
 private:
 //    QGraphicsItem * head;
+    std::vector<CorpsSnake *> corps;
     QString name;
     int score;
     int step;
