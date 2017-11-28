@@ -1,6 +1,6 @@
 #include "gamewindow.h"
 
-GameWindow::GameWindow(QWidget *parent, int width, int height)
+GameWindow::GameWindow(std::vector<QString*> joueurs, QWidget *parent, int width, int height)
     : QGraphicsView(parent)
 {
     scene = new QGraphicsScene();

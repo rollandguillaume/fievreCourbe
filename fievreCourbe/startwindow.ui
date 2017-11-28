@@ -40,4 +40,8 @@
  </widget>
  <resources/>
  <connections/>
+ <slots>
+  <signal>test(std::vector)</signal>
+  <slot>start(std::vector)</slot>
+ </slots>
 </ui>

@@ -25,7 +25,8 @@ private:
     void deleteJoueur(int index);
 
 private:
-    std::vector<Snake*> *snakes;
+    std::vector<QString*> joueurs;
+    QString colors[6] = {"red", "orange", "green", "blue", "grey", "pink"};
     Dialog_Key *dialog_key;
 };
 
