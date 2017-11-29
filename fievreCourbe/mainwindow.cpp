@@ -24,10 +24,9 @@ void MainWindow::start()
 {
     int width = Config::WIDTH;
     int height = Config::HEIGHT;
-    std::vector<QString*> joueurs;
 
     // Configure the GameWindow and the ScoreBoard
-    game_win = new GameWindow(joueurs, this, width, height);
+    game_win = new GameWindow(start_win->getJoueurs(), this, width, height);
 
     // Set the new action : restart a new game (Ctrl+Shift+N)
     QObject::connect(ui->action_new, SIGNAL(triggered(bool)), game_win, SLOT(initPart()));

@@ -23,8 +23,8 @@ public:
     void move();
     void setKeyRight(bool press);
     void setKeyLeft(bool press);
-    void setKeyOnRight(std::string val);
-    void setKeyOnLeft(std::string val);
+    void setKeyOnRight(QString val);
+    void setKeyOnLeft(QString val);
     int getKeyOnRight() const;
     int getKeyOnLeft() const;
     bool checkColisions();

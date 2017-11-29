@@ -18,6 +18,7 @@ class StartWindow : public QWidget
 public:
     explicit StartWindow(QWidget *parent = 0);
     ~StartWindow();
+    std::vector<QString> getJoueurs();
 
 private:
     Ui::StartWindow *ui;
@@ -25,7 +26,7 @@ private:
     void deleteJoueur(int index);
 
 private:
-    std::vector<QString*> joueurs;
+    std::vector<QString> joueurs;
     QString colors[6] = {"red", "orange", "green", "blue", "grey", "pink"};
     Dialog_Key *dialog_key;
 };

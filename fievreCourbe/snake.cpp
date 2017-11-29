@@ -153,15 +153,15 @@ void Snake::setKeyLeft(bool press)
  * @brief Snake::setKeyOnRight
  * @param val
  */
-void Snake::setKeyOnRight(std::__cxx11::string val)
+void Snake::setKeyOnRight(QString val)
 {
-    QKeySequence seq = QKeySequence(QString::fromStdString(val));
+    QKeySequence seq = QKeySequence(val.toInt()).toString();
     keyOnRight = seq[0];
 }
 
-void Snake::setKeyOnLeft(std::__cxx11::string val)
+void Snake::setKeyOnLeft(QString val)
 {
-    QKeySequence seq = QKeySequence(QString::fromStdString(val));
+    QKeySequence seq = QKeySequence(val.toInt()).toString();
     keyOnLeft = seq[0];
 }
 
@@ -197,7 +197,6 @@ bool Snake::checkColisions()
         }
     }
 
-    return false;
     return (list.size() > 0) ;
 }
 
@@ -255,6 +254,7 @@ void Snake::addTrace()
     courbe.lineTo(this->x()+getSize()/2,this->y()+getSize()/2);
     pathCourbe = new QGraphicsPathItem(courbe);
     pathCourbe->setPen(QPen(QBrush(QColor(couleur)), getSize()));
+    pathCourbe->setBrush(QBrush(QColor(QString("white"))));
     scene->addItem(pathCourbe);
 
 }

@@ -57,7 +57,9 @@ void StartWindow::addJoueur()
     joueur = joueur + colors[i] + ";";
 
     // Ajout du joueur à la liste
-    joueurs.push_back(&joueur);
+    qDebug() << joueur;
+    //qDebug() << &joueur;
+    joueurs.push_back(joueur);
 
     // Affiche du joueur créer
 
@@ -81,4 +83,9 @@ void StartWindow::addJoueur()
 void StartWindow::deleteJoueur(int index)
 {
 
+}
+
+std::vector<QString> StartWindow::getJoueurs()
+{
+    return this->joueurs;
 }

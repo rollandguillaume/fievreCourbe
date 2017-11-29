@@ -16,7 +16,7 @@ class GameWindow : public QGraphicsView
     Q_OBJECT
 
 public:
-    GameWindow(std::vector<QString*> joueurs, QWidget * parent = 0, int width = Config::WIDTH, int height = Config::HEIGHT);
+    GameWindow(std::vector<QString> joueurs, QWidget * parent = 0, int width = Config::WIDTH, int height = Config::HEIGHT);
     ~GameWindow();
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent * event);
@@ -39,6 +39,7 @@ private:
     QGraphicsScene * scene;
     std::vector<Snake*> snakes;
     std::vector<Wall*> walls;
+    std::vector<QString> joueurs;
 
 };
 
