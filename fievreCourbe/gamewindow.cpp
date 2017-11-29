@@ -94,6 +94,7 @@ void GameWindow::toRemoveSnakesOnScene()
     for (int s = 0; s < size; s++) {
         scene->removeItem(snakes[s]);
     }
+
 }
 
 // Créer tous les serpents
@@ -137,7 +138,8 @@ void GameWindow::destroyWalls()
 {
     int size = walls.size();
     for (int s = 0; s < size; s++) {
-        scene->removeItem(walls[s]);
+        scene->removeItem(snakes[s]);
+        snakes[s]->clearPath();
     }
 }
 
@@ -179,6 +181,3 @@ std::vector<Snake*>* GameWindow::getSnakes()
 {
     return &snakes;
 }
-
-
-

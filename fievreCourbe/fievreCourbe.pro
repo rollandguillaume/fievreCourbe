@@ -12,7 +12,8 @@ SOURCES += \
     wall.cpp \
     config.cpp \
     startwindow.cpp \
-    dialog_key.cpp
+    dialog_key.cpp \
+    corpssnake.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -23,7 +24,8 @@ HEADERS += \
     wall.h \
     config.h \
     startwindow.h \
-    dialog_key.h
+    dialog_key.h \
+    corpssnake.h
 
 FORMS += \
     mainwindow.ui \
