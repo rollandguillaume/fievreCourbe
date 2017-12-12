@@ -11,6 +11,7 @@ public:
     static const int SIZE_SNAKE = 7;
     static const int COMPTEUR_PRINT = 10;
     static const int WALL_SIZE = 5;
+    static const int SPACE_FROM_WALL = Config::WALL_SIZE + 50;
 
 };
 

@@ -129,12 +129,13 @@ void GameWindow::createSnakes()
 void GameWindow::toPlaceSnakesOnScene()
 {
     //give a random position
-    snakes[0]->setPosInit(30, 40);
-    snakes[1]->setPosInit(50, 100);
+    std::pair<int, int> test;
 
     //to place all snakes
     int size = snakes.size();
     for (int s = 0; s < size; s++) {
+        test = getRandomPos();
+        snakes[s]->setPosInit(test.first, test.second);
         scene->addItem(snakes[s]);
     }
 }
@@ -146,6 +147,16 @@ void GameWindow::destroyWalls()
     for (int s = 0; s < size; s++) {
         scene->removeItem(walls[s]);
     }
+}
+
+std::pair<int, int> GameWindow::getRandomPos()
+{
+    int min = Config::SPACE_FROM_WALL;
+    int maxX = Config::WIDTH-Config::SPACE_FROM_WALL;
+    int maxY = Config::HEIGHT-Config::SPACE_FROM_WALL;
+    int a = min + ( std::rand() % static_cast<int>(maxX - min + 1));
+    int b = min + ( std::rand() % static_cast<int>(maxY - min + 1));
+    return std::pair<int, int>(a, b);
 }
 
 // Créer les murs

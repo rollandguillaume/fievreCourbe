@@ -29,6 +29,7 @@ private:
     void toRemoveSnakesOnScene();
     void erectWalls();
     void destroyWalls();
+    std::pair<int, int> getRandomPos();
 
 public slots:
     void play();
