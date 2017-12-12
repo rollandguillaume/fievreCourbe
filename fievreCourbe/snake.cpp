@@ -23,7 +23,7 @@ Snake::Snake(QString name)
 
     this->compteurPrint = Config::COMPTEUR_PRINT;
 
-    for (int i = 0; i < 5 ; i++) {
+    for (int i = 0; i < 4 ; i++) {
         CorpsSnake * item = new CorpsSnake(Config::SIZE_SNAKE);
         corps.push_back(item);
     }
