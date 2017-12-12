@@ -40,6 +40,7 @@ private:
     std::vector<Snake*> snakes;
     std::vector<Wall*> walls;
     std::vector<QString> joueurs;
+    int nbAlive;
 
 };
 

@@ -54,6 +54,8 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
         if (event->key() == Qt::Key_Space) {
             if (clock->isActive()) {
                 clock->stop();
+            } else if (nbAlive == 1) {
+                initPart();
             } else {
                 clock->start(13);
             }
@@ -77,7 +79,10 @@ void GameWindow::keyReleaseEvent(QKeyEvent *event)
 
 void GameWindow::initPart()
 {
-    clock->stop();
+    if ( clock->isActive() ){
+        clock->stop();
+    }
+    nbAlive = 0;
 
     toRemoveSnakesOnScene();
     createSnakes();
@@ -93,6 +98,7 @@ void GameWindow::toRemoveSnakesOnScene()
     int size = snakes.size();
     for (int s = 0; s < size; s++) {
         scene->removeItem(snakes[s]);
+        snakes[s]->clearPath();
     }
 
 }
@@ -138,8 +144,7 @@ void GameWindow::destroyWalls()
 {
     int size = walls.size();
     for (int s = 0; s < size; s++) {
-        scene->removeItem(snakes[s]);
-        snakes[s]->clearPath();
+        scene->removeItem(walls[s]);
     }
 }
 
@@ -168,8 +173,15 @@ void GameWindow::erectWalls()
 void GameWindow::play()
 {
     int size = snakes.size();
+    nbAlive = 0;
     for (int s = 0; s < size; s++) {
         snakes[s]->move();
+        if (snakes[s]->isAlive()) {
+            nbAlive++;
+        }
+    }
+    if (nbAlive == 1) {
+        clock->stop();
     }
 
 }
