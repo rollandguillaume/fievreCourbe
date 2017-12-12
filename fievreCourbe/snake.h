@@ -75,6 +75,9 @@ private:
     QPainterPath courbe;
     QGraphicsPathItem * pathCourbe;
 
+    int cptPath;
+    int cptHole;
+
 };
 
 #endif // SNAKE_H

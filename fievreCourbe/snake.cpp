@@ -27,6 +27,10 @@ Snake::Snake(QString name)
         CorpsSnake * item = new CorpsSnake(Config::SIZE_SNAKE);
         corps.push_back(item);
     }
+
+    cptPath = Config::TIC_PATH;
+    cptHole = Config::TIC_HOLE;
+
 }
 
 void Snake::move()
@@ -75,7 +79,18 @@ void Snake::move()
             //new pos of snake
             setPos(x2, y2);
 
+            cptPath--;
+            if (cptPath <= 0) {
+                cptHole--;
+                if (cptHole <= 0) {
+                    cptPath = Config::TIC_PATH;
+                    cptHole = Config::TIC_HOLE;
+                }
+            }
+
+
             if (this->compteurPrint <= 0) {
+
                 addTrace();
                 this->compteurPrint = Config::COMPTEUR_PRINT;
             } else {
@@ -295,7 +310,12 @@ void Snake::addTrace()
     float ypos = corps.back()->y();
 
     scene->removeItem(pathCourbe);
-    courbe.lineTo(xpos+getSize()/2, ypos+getSize()/2);
+
+    if (cptHole > 0 && cptPath <= 0) {
+        courbe.moveTo(xpos+getSize()/2, ypos+getSize()/2);
+    } else {
+        courbe.lineTo(xpos+getSize()/2, ypos+getSize()/2);
+    }
 
     pathCourbe = new QGraphicsPathItem(courbe);
 
