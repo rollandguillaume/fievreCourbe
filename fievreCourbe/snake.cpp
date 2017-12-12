@@ -189,10 +189,23 @@ bool Snake::checkColisions()
     {
         QGraphicsPathItem * path = dynamic_cast<QGraphicsPathItem*>(i);
         if (path) {
-            qDebug()<<name;
-            qDebug()<<"pathitem";
-            path->setBrush(QBrush(QColor(QString("black"))));
-            list.removeAt(p);
+
+            QPainterPathStroker * test = new QPainterPathStroker();
+
+            test->setWidth(Config::SIZE_SNAKE);
+
+            // TODO BETTER
+
+            if (test->createStroke(path->path()).contains(QPointF(this->x()+this->getSize(), this->y()+this->getSize()))) {
+                qDebug()<<"test";
+            }
+            else if (test->createStroke(path->path()).contains(QPointF(this->x(), this->y()))) {
+                qDebug()<<"test";
+            }
+            else {
+                list.removeAt(p);
+            }
+
         } else {
             CorpsSnake * itemCorps = dynamic_cast<CorpsSnake*>(i);
             if (itemCorps) {
@@ -283,6 +296,7 @@ void Snake::addTrace()
 
     scene->removeItem(pathCourbe);
     courbe.lineTo(xpos+getSize()/2, ypos+getSize()/2);
+
     pathCourbe = new QGraphicsPathItem(courbe);
 
     pathCourbe->setPen(QPen(QBrush(QColor(couleur)), getSize(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
