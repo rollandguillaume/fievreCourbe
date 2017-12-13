@@ -19,7 +19,7 @@ GameWindow::GameWindow(std::vector<QString> joueurs, QWidget *parent, int width,
     scene->setSceneRect(0,0,width,height);
 
     // Background noir
-    //this->setBackgroundBrush(QBrush(Qt::black));
+    this->setBackgroundBrush(QBrush(Qt::black));
 
     // Timer ??
     clock = new QTimer();
@@ -180,7 +180,7 @@ void GameWindow::play()
             nbAlive++;
         }
     }
-    if (nbAlive == 1) {
+    if (nbAlive <= 1) {
         clock->stop();
     }
 

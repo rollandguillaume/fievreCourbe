@@ -28,8 +28,7 @@ Snake::Snake(QString name)
         corps.push_back(item);
     }
 
-    cptPath = Config::TIC_PATH;
-    cptHole = Config::TIC_HOLE;
+    randomizePath();
 
 }
 
@@ -83,8 +82,7 @@ void Snake::move()
             if (cptPath <= 0) {
                 cptHole--;
                 if (cptHole <= 0) {
-                    cptPath = Config::TIC_PATH;
-                    cptHole = Config::TIC_HOLE;
+                    randomizePath();
                 }
             }
 
@@ -150,7 +148,13 @@ void Snake::commitSuicide()
     //comme donner des points aux adverssaires
     life = false;
 
+}
 
+void Snake::randomizePath()
+{
+    cptPath = rand() % Config::TIC_PATH_MIN + Config::TIC_PATH_MAX;
+    //qDebug()<<this->name<<":"<<cptPath;
+    cptHole = Config::TIC_HOLE;
 }
 
 void Snake::setKeyRight(bool press)
@@ -291,7 +295,8 @@ void Snake::setColor(QString color)
     for (int i = 0; i < size ; i++) {
         CorpsSnake * item = dynamic_cast<CorpsSnake*>(corps[i]);
         if (item) {
-            item->setBrush(QBrush(QColor(QString("pink"))));
+            //item->setBrush(QBrush(QColor(QString("pink"))));
+            item->setBrush(QBrush(QColor(couleur)));
             item->setPen(QPen(Qt::NoPen));
         }
     }

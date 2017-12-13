@@ -48,6 +48,7 @@ private:
     void rotation();
     std::pair<int, int> * checkDirection();
     void commitSuicide();
+    void randomizePath();
 
 public:
     static const int BAS = 0;
@@ -67,16 +68,17 @@ private:
     int angle;//angle de rotation
     int keyOnRight;//value of the key to turn on right
     int keyOnLeft;
-    bool life;
+    bool life;//isalive
     QGraphicsScene * scene;
     QString couleur;
-    int compteurPrint;
+    int compteurPrint;//nombre de tic avant de repaint trace
 
     QPainterPath courbe;
     QGraphicsPathItem * pathCourbe;
+    int cptPath;//nombre de tic d'impression trace
+    int cptHole;//nombre de tic de non impression (=creux courbe)
 
-    int cptPath;
-    int cptHole;
+    bool hidden;
 
 };
 
