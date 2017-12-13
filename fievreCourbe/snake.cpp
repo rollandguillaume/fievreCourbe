@@ -7,6 +7,8 @@ Snake::Snake(QString name)
     this->name = name;
     this->score = 0;
     this->step = 1;
+    size = Config::SIZE_SNAKE;
+    hidden = false;
 
     this->setBrush(QBrush(Qt::yellow));
     this->setPen(QPen(Qt::NoPen));
@@ -14,9 +16,9 @@ Snake::Snake(QString name)
     this->keyLeft = false;
     this->keyRight = false;
     this->angle = 2;
-    this->direction = 0;
+    this->direction = (rand() + 359) % 360;
     life = true;
-    setColor(QString("white"));
+    setColor(QString("white"));//couleur par default
 //    head = new QGraphicsEllipseItem();
     this->setRect(0,0,Config::SIZE_SNAKE, Config::SIZE_SNAKE);
     setZValue(1);
@@ -88,11 +90,11 @@ void Snake::move()
 
 
             if (this->compteurPrint <= 0) {
-
                 addTrace();
                 this->compteurPrint = Config::COMPTEUR_PRINT;
             } else {
                 this->compteurPrint--;
+
             }
         }
     }
@@ -304,8 +306,12 @@ void Snake::setColor(QString color)
 
 qreal Snake::getSize() const
 {
-    //qd on ajoutera les bonus, il faudra
-    return Config::SIZE_SNAKE;
+    return size;
+}
+
+void Snake::growUp()
+{
+    //TODO
 }
 
 void Snake::addTrace()

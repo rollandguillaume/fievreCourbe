@@ -38,6 +38,7 @@ public:
     void setScene(QGraphicsScene * scene);
     void setColor(QString color);
     qreal getSize() const;
+    void growUp();
     void addTrace();
     void setPosInit(float x, float y);
     void clearPath();
@@ -79,6 +80,7 @@ private:
     int cptHole;//nombre de tic de non impression (=creux courbe)
 
     bool hidden;
+    int size;
 
 };
 
