@@ -57,8 +57,6 @@ void StartWindow::addJoueur()
     joueur = joueur + colors[i] + ";";
 
     // Ajout du joueur à la liste
-    qDebug() << joueur;
-    //qDebug() << &joueur;
     joueurs.push_back(joueur);
 
     // Affiche du joueur créer

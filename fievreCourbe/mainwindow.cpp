@@ -17,9 +17,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize the startWindow where you configure the game
     start_win = new StartWindow(this);
 
-    //layout = new QHBoxLayout();
-    //layout->addWidget(start_win);
-
     this->setCentralWidget(start_win);
 }
 
@@ -30,11 +27,21 @@ void MainWindow::start()
 
     // Configure the GameWindow and the ScoreBoard
     game_win = new GameWindow(start_win->getJoueurs(), this, width, height);
+    sb = new ScoreBoard(this, game_win->getSnakes());
 
-    this->setCentralWidget(game_win);
+    layout = new QHBoxLayout();
+    layout->addWidget(game_win);
+    layout->addWidget(sb);
+
+    QWidget * game = new QWidget();
+    game->setLayout(layout);
+    this->setCentralWidget(game);
+
 
     // Setting of the window size so it shows all the GameWindow
-    setFixedSize(game_win->width(), game_win->height()+ui->menubar->height());
+    this->adjustSize();
+    this->setFixedWidth(game_win->width() + sb->width());
+    //setFixedSize(game_win->width() + sb->width(), game_win->height() + ui->menubar->height());
 
 }
 

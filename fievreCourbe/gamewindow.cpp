@@ -15,16 +15,16 @@ GameWindow::GameWindow(std::vector<QString> joueurs, QWidget *parent, int width,
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // Taille fixer
-    this->setFixedSize(width, height);
+    this->setFixedSize(width+Config::WALL_SIZE, height+Config::WALL_SIZE);
     scene->setSceneRect(0,0,width,height);
 
     // Background noir
-    //this->setBackgroundBrush(QBrush(Qt::black));
+    this->setBackgroundBrush(QBrush(Qt::black));
 
-    // Timer ??
+    // Timer
     clock = new QTimer();
 
-    // Signal ??
+    // Signal
     connect(clock,SIGNAL(timeout()),this,SLOT(play()));
 
     // Séquence d'initialisation
@@ -111,7 +111,6 @@ void GameWindow::createSnakes()
     int size = joueurs.size();
     for (int s = 0; s < size; s++) {
         QString tmp = joueurs[s];
-        qDebug() << tmp;
         QStringList test = tmp.split(';');
 
         snakes.push_back(new Snake(test.at(0)));
@@ -169,8 +168,8 @@ void GameWindow::erectWalls()
         walls.push_back(new Wall(0, 0, wallSize, height));
         walls.push_back(new Wall(0, 0, width, wallSize));
 
-        walls.push_back(new Wall(width-wallSize-4, 0, wallSize, height));
-        walls.push_back(new Wall(0, height-wallSize-4, width, wallSize));
+        walls.push_back(new Wall(width-wallSize, 0, wallSize, height));
+        walls.push_back(new Wall(0, height-wallSize, width, wallSize));
     }
 
     int size = walls.size();
