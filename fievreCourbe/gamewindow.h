@@ -5,6 +5,8 @@
 #include <QtGui>
 #include <QTimer>
 #include <QBrush>
+#include <QGraphicsView>
+#include <QGridLayout>
 
 #include <iostream>
 
