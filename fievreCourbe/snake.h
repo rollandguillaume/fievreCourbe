@@ -34,7 +34,6 @@ public:
     QString getName();
     int getScore();
     void resetScore();
-    void addPoint();
     void setScene(QGraphicsScene * scene);
     void setColor(QString color);
     qreal getSize() const;
@@ -44,6 +43,8 @@ public:
     void clearPath();
     void traceCorps();
     void bodyFollowHead();
+    void updateScore();
+    void setScore(QString val);
 
 private:
     void rotation();

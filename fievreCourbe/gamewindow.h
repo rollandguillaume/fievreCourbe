@@ -12,6 +12,7 @@
 
 #include "snake.h"
 #include "wall.h"
+#include "scoreboard.h"
 
 class GameWindow : public QGraphicsView
 {
@@ -25,12 +26,15 @@ public:
     void createSnakes();
     std::vector<Snake*> * getSnakes();
     void updateSnake(QGridLayout layout);
+    void setSB(ScoreBoard * sb);
 
 private:
     void toPlaceSnakesOnScene();
     void toRemoveSnakesOnScene();
     void erectWalls();
     void destroyWalls();
+    std::pair<int, int> getRandomPos();
+    void endGame();
 
 public slots:
     void play();
@@ -39,6 +43,7 @@ public slots:
 private:
     QTimer * clock;
     QGraphicsScene * scene;
+    ScoreBoard * sb;
     std::vector<Snake*> snakes;
     std::vector<Wall*> walls;
     std::vector<QString> joueurs;

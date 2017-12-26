@@ -15,16 +15,16 @@ GameWindow::GameWindow(std::vector<QString> joueurs, QWidget *parent, int width,
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // Taille fixer
-    this->setFixedSize(width, height);
+    this->setFixedSize(width+Config::WALL_SIZE, height+Config::WALL_SIZE);
     scene->setSceneRect(0,0,width,height);
 
     // Background noir
     this->setBackgroundBrush(QBrush(Qt::black));
 
-    // Timer ??
+    // Timer
     clock = new QTimer();
 
-    // Signal ??
+    // Signal
     connect(clock,SIGNAL(timeout()),this,SLOT(play()));
 
     // Séquence d'initialisation
@@ -54,7 +54,7 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
         if (event->key() == Qt::Key_Space) {
             if (clock->isActive()) {
                 clock->stop();
-            } else if (nbAlive == 1) {
+            } else if (nbAlive <= 1) {
                 initPart();
             } else {
                 clock->start(13);
@@ -82,11 +82,12 @@ void GameWindow::initPart()
     if ( clock->isActive() ){
         clock->stop();
     }
-    nbAlive = 0;
 
     toRemoveSnakesOnScene();
     createSnakes();
     toPlaceSnakesOnScene();
+
+    nbAlive = snakes.size();
 
     destroyWalls();
     erectWalls();
@@ -99,6 +100,13 @@ void GameWindow::toRemoveSnakesOnScene()
     for (int s = 0; s < size; s++) {
         scene->removeItem(snakes[s]);
         snakes[s]->clearPath();
+
+        QString tmp = joueurs[s];
+        QStringList snake = tmp.split(';');
+
+        tmp = snake[0] + ";" + snake[1] + ";" + snake[2] + ";" + snake[3] + ";" + QString::number(snakes[s]->getScore()) + ";";
+
+        joueurs[s] = tmp;
     }
 
 }
@@ -106,18 +114,19 @@ void GameWindow::toRemoveSnakesOnScene()
 // Créer tous les serpents
 void GameWindow::createSnakes()
 {
+
     snakes.clear();
 
     int size = joueurs.size();
     for (int s = 0; s < size; s++) {
         QString tmp = joueurs[s];
-        qDebug() << tmp;
-        QStringList test = tmp.split(';');
+        QStringList snake = tmp.split(';');
 
-        snakes.push_back(new Snake(test.at(0)));
-        snakes[s]->setKeyOnLeft(test.at(1));
-        snakes[s]->setKeyOnRight(test.at(2));
-        snakes[s]->setColor(test.at(3));
+        snakes.push_back(new Snake(snake.at(0)));
+        snakes[s]->setKeyOnLeft(snake.at(1));
+        snakes[s]->setKeyOnRight(snake.at(2));
+        snakes[s]->setColor(snake.at(3));
+        snakes[s]->setScore(snake.at(4));
     }
 
     for (int s = 0; s < size; s++) {
@@ -129,12 +138,13 @@ void GameWindow::createSnakes()
 void GameWindow::toPlaceSnakesOnScene()
 {
     //give a random position
-    snakes[0]->setPosInit(30, 40);
-    snakes[1]->setPosInit(50, 100);
+    std::pair<int, int> test;
 
     //to place all snakes
     int size = snakes.size();
     for (int s = 0; s < size; s++) {
+        test = getRandomPos();
+        snakes[s]->setPosInit(test.first, test.second);
         scene->addItem(snakes[s]);
     }
 }
@@ -148,6 +158,27 @@ void GameWindow::destroyWalls()
     }
 }
 
+std::pair<int, int> GameWindow::getRandomPos()
+{
+    int min = Config::SPACE_FROM_WALL;
+    int maxX = Config::WIDTH-Config::SPACE_FROM_WALL;
+    int maxY = Config::HEIGHT-Config::SPACE_FROM_WALL;
+    int a = min + ( std::rand() % static_cast<int>(maxX - min + 1));
+    int b = min + ( std::rand() % static_cast<int>(maxY - min + 1));
+    return std::pair<int, int>(a, b);
+}
+
+void GameWindow::endGame()
+{
+    int size = snakes.size();
+    for (int s = 0; s < size; s++) {
+        if (snakes[s]->getScore() >= ((size-1)*10)) {
+            qDebug() << "Joueur " << s << "a gagné !!";
+        }
+    }
+    // TODO fin de la partie retour vers l'ecran start window ?
+}
+
 // Créer les murs
 void GameWindow::erectWalls()
 {
@@ -158,32 +189,54 @@ void GameWindow::erectWalls()
         walls.push_back(new Wall(0, 0, wallSize, height));
         walls.push_back(new Wall(0, 0, width, wallSize));
 
-        walls.push_back(new Wall(width-wallSize-4, 0, wallSize, height));
-        walls.push_back(new Wall(0, height-wallSize-4, width, wallSize));
+        walls.push_back(new Wall(width-wallSize, 0, wallSize, height));
+        walls.push_back(new Wall(0, height-wallSize, width, wallSize));
     }
 
     int size = walls.size();
     for (int s = 0; s < size; s++) {
         scene->addItem(walls[s]);
     }
-
 }
 
-// Début d'une manche
+// Un tour de jeu
 void GameWindow::play()
 {
+    // Le nombre de Snake
     int size = snakes.size();
     nbAlive = 0;
+    // Compteur temporaire
+    int tmp = 0;
+
     for (int s = 0; s < size; s++) {
-        snakes[s]->move();
+
+        // Le nombre de snake vivant
         if (snakes[s]->isAlive()) {
             nbAlive++;
         }
-    }
-    if (nbAlive <= 1) {
-        clock->stop();
+
+        // Chaque Snake bouge une fois
+        snakes[s]->move();
+
+        // Compteur pour savoir si un snake est mort à se tour
+        if (snakes[s]->isAlive()) {
+            tmp++;
+        }
+
+        // Si un snake est mort, on update le score des vivants
+        if(tmp != nbAlive) {
+            for (int t = 0; t < size; t++) {
+                snakes[t]->updateScore();
+                this->sb->score(t, snakes[t]->getScore());
+            }
+            nbAlive = tmp;
+        }
     }
 
+    if (nbAlive <= 1) {
+        clock->stop();
+        endGame();
+    }
 }
 
 /*******************
@@ -192,4 +245,9 @@ void GameWindow::play()
 std::vector<Snake*>* GameWindow::getSnakes()
 {
     return &snakes;
+}
+
+void GameWindow::setSB(ScoreBoard *sb)
+{
+    this->sb = sb;
 }
