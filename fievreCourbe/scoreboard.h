@@ -20,7 +20,6 @@ public:
     void score(int snakeIndex, int score);
     void resetScore();
 
-
 private:
     Ui::ScoreBoard * ui;
     std::vector<std::pair<QLabel*, QLabel*>*> scores;

@@ -54,11 +54,9 @@ void StartWindow::addJoueur()
 
     // Fabriction du QString
     joueur = joueur + QString::number(keyLeft) + ";" + QString::number(keyRight) + ";";
-    joueur = joueur + colors[i] + ";";
+    joueur = joueur + colors[i] + ";0;";
 
     // Ajout du joueur à la liste
-    qDebug() << joueur;
-    //qDebug() << &joueur;
     joueurs.push_back(joueur);
 
     // Affiche du joueur créer
