@@ -1,6 +1,8 @@
 #include "scoreboard.h"
 #include "ui_scoreboard.h"
 
+#include <QDebug>
+
 ScoreBoard::ScoreBoard(QWidget *parent, std::vector<Snake*> *snakes) :
     QWidget(parent),
     ui(new Ui::ScoreBoard)
@@ -40,7 +42,7 @@ ScoreBoard::~ScoreBoard()
 
 void ScoreBoard::score(int snakeIndex, int score)
 {
-    scores.at(snakeIndex)->second->setText(QString(score));
+    scores.at(snakeIndex)->second->setText(QString::number(score));
 }
 
 void ScoreBoard::resetScore()

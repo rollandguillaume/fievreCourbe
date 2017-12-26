@@ -54,7 +54,7 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
         if (event->key() == Qt::Key_Space) {
             if (clock->isActive()) {
                 clock->stop();
-            } else if (nbAlive == 1) {
+            } else if (nbAlive <= 1) {
                 initPart();
             } else {
                 clock->start(13);
@@ -82,11 +82,12 @@ void GameWindow::initPart()
     if ( clock->isActive() ){
         clock->stop();
     }
-    nbAlive = 0;
 
     toRemoveSnakesOnScene();
     createSnakes();
     toPlaceSnakesOnScene();
+
+    nbAlive = snakes.size();
 
     destroyWalls();
     erectWalls();
@@ -167,6 +168,17 @@ std::pair<int, int> GameWindow::getRandomPos()
     return std::pair<int, int>(a, b);
 }
 
+void GameWindow::endGame()
+{
+    int size = snakes.size();
+    for (int s = 0; s < size; s++) {
+        if (snakes[s]->getScore() >= ((size-1)*10)) {
+            qDebug() << "Joueur " << s << "a gagné !!";
+        }
+    }
+    // TODO fin de la partie retour vers l'ecran start window ?
+}
+
 // Créer les murs
 void GameWindow::erectWalls()
 {
@@ -185,7 +197,6 @@ void GameWindow::erectWalls()
     for (int s = 0; s < size; s++) {
         scene->addItem(walls[s]);
     }
-
 }
 
 // Un tour de jeu
@@ -216,14 +227,15 @@ void GameWindow::play()
         if(tmp != nbAlive) {
             for (int t = 0; t < size; t++) {
                 snakes[t]->updateScore();
-                ScoreBoard::score(t, snakes[t]->getScore());
+                this->sb->score(t, snakes[t]->getScore());
             }
             nbAlive = tmp;
         }
     }
 
-    if (nbAlive == 1) {
+    if (nbAlive <= 1) {
         clock->stop();
+        endGame();
     }
 }
 
@@ -233,4 +245,9 @@ void GameWindow::play()
 std::vector<Snake*>* GameWindow::getSnakes()
 {
     return &snakes;
+}
+
+void GameWindow::setSB(ScoreBoard *sb)
+{
+    this->sb = sb;
 }

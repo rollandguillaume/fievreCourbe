@@ -28,6 +28,7 @@ void MainWindow::start()
     // Configure the GameWindow and the ScoreBoard
     game_win = new GameWindow(start_win->getJoueurs(), this, width, height);
     sb = new ScoreBoard(this, game_win->getSnakes());
+    game_win->setSB(sb);
 
     layout = new QHBoxLayout();
     layout->addWidget(game_win);
