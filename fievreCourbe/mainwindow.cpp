@@ -41,7 +41,6 @@ void MainWindow::start()
     // Setting of the window size so it shows all the GameWindow
     this->adjustSize();
     this->setFixedWidth(game_win->width() + sb->width());
-    //setFixedSize(game_win->width() + sb->width(), game_win->height() + ui->menubar->height());
 
 }
 

@@ -10,6 +10,7 @@
 
 #include "snake.h"
 #include "wall.h"
+#include "scoreboard.h"
 
 class GameWindow : public QGraphicsView
 {

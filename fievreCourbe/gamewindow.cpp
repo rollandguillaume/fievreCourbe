@@ -99,6 +99,13 @@ void GameWindow::toRemoveSnakesOnScene()
     for (int s = 0; s < size; s++) {
         scene->removeItem(snakes[s]);
         snakes[s]->clearPath();
+
+        QString tmp = joueurs[s];
+        QStringList snake = tmp.split(';');
+
+        tmp = snake[0] + ";" + snake[1] + ";" + snake[2] + ";" + snake[3] + ";" + QString::number(snakes[s]->getScore()) + ";";
+
+        joueurs[s] = tmp;
     }
 
 }
@@ -106,17 +113,19 @@ void GameWindow::toRemoveSnakesOnScene()
 // Créer tous les serpents
 void GameWindow::createSnakes()
 {
+
     snakes.clear();
 
     int size = joueurs.size();
     for (int s = 0; s < size; s++) {
         QString tmp = joueurs[s];
-        QStringList test = tmp.split(';');
+        QStringList snake = tmp.split(';');
 
-        snakes.push_back(new Snake(test.at(0)));
-        snakes[s]->setKeyOnLeft(test.at(1));
-        snakes[s]->setKeyOnRight(test.at(2));
-        snakes[s]->setColor(test.at(3));
+        snakes.push_back(new Snake(snake.at(0)));
+        snakes[s]->setKeyOnLeft(snake.at(1));
+        snakes[s]->setKeyOnRight(snake.at(2));
+        snakes[s]->setColor(snake.at(3));
+        snakes[s]->setScore(snake.at(4));
     }
 
     for (int s = 0; s < size; s++) {
@@ -179,21 +188,43 @@ void GameWindow::erectWalls()
 
 }
 
-// Début d'une manche
+// Un tour de jeu
 void GameWindow::play()
 {
+    // Le nombre de Snake
     int size = snakes.size();
     nbAlive = 0;
+    // Compteur temporaire
+    int tmp = 0;
+
     for (int s = 0; s < size; s++) {
-        snakes[s]->move();
+
+        // Le nombre de snake vivant
         if (snakes[s]->isAlive()) {
             nbAlive++;
         }
+
+        // Chaque Snake bouge une fois
+        snakes[s]->move();
+
+        // Compteur pour savoir si un snake est mort à se tour
+        if (snakes[s]->isAlive()) {
+            tmp++;
+        }
+
+        // Si un snake est mort, on update le score des vivants
+        if(tmp != nbAlive) {
+            for (int t = 0; t < size; t++) {
+                snakes[t]->updateScore();
+                ScoreBoard::score(t, snakes[t]->getScore());
+            }
+            nbAlive = tmp;
+        }
     }
+
     if (nbAlive == 1) {
         clock->stop();
     }
-
 }
 
 /*******************

@@ -5,7 +5,7 @@
 Snake::Snake(QString name)
 {
     this->name = name;
-    this->score = 0;
+    //this->score = 0;
     this->step = 1;
 
     this->setBrush(QBrush(Qt::yellow));
@@ -17,7 +17,7 @@ Snake::Snake(QString name)
     this->direction = 0;
     life = true;
     setColor(QString("white"));
-//    head = new QGraphicsEllipseItem();
+    //head = new QGraphicsEllipseItem();
     this->setRect(0,0,Config::SIZE_SNAKE, Config::SIZE_SNAKE);
     setZValue(1);
 
@@ -134,8 +134,18 @@ void Snake::commitSuicide()
     //TODO faire des trucs
     //comme donner des points aux adverssaires
     life = false;
+}
 
+void Snake::updateScore()
+{
+    if (life) {
+        score++;
+    }
+}
 
+void Snake::setScore(QString val)
+{
+    score = val.toInt();
 }
 
 void Snake::setKeyRight(bool press)
@@ -190,17 +200,15 @@ bool Snake::checkColisions()
         QGraphicsPathItem * path = dynamic_cast<QGraphicsPathItem*>(i);
         if (path) {
 
-            QPainterPathStroker * test = new QPainterPathStroker();
+            QPainterPathStroker * testColisions = new QPainterPathStroker();
 
-            test->setWidth(Config::SIZE_SNAKE);
+            testColisions->setWidth(Config::SIZE_SNAKE);
 
             // TODO BETTER
 
-            if (test->createStroke(path->path()).contains(QPointF(this->x()+this->getSize(), this->y()+this->getSize()))) {
-                qDebug()<<"test";
+            if (testColisions->createStroke(path->path()).contains(QPointF(this->x()+this->getSize(), this->y()+this->getSize()))) {
             }
-            else if (test->createStroke(path->path()).contains(QPointF(this->x(), this->y()))) {
-                qDebug()<<"test";
+            else if (testColisions->createStroke(path->path()).contains(QPointF(this->x(), this->y()))) {
             }
             else {
                 list.removeAt(p);
@@ -254,11 +262,6 @@ int Snake::getScore()
 void Snake::resetScore()
 {
     this->score = 0;
-}
-
-void Snake::addPoint()
-{
-    this->score++;
 }
 
 void Snake::setScene(QGraphicsScene *scene)
