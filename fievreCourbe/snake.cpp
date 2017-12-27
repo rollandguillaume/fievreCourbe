@@ -223,14 +223,20 @@ bool Snake::checkColisions()
 
     foreach(QGraphicsItem * i , list)
     {
-        QGraphicsPathItem * path = dynamic_cast<QGraphicsPathItem*>(i);
-        if (path) {
+        Bonus * bonus = dynamic_cast<Bonus*>(i);
+        if (bonus) {
+            //executer le bonus
+            bonus->execute();
+            //le retirer de la list de colision
+            list.removeAt(p);
+            //supprimer le bonus
+            delete bonus;
+        } else {
+            QGraphicsPathItem * path = dynamic_cast<QGraphicsPathItem*>(i);
+            if (path) {
 
-            QPainterPathStroker * testColisions = new QPainterPathStroker();
-
-            testColisions->setWidth(Config::SIZE_SNAKE);
-
-            // TODO BETTER
+                QPainterPathStroker * testColisions = new QPainterPathStroker();
+                testColisions->setWidth(Config::SIZE_SNAKE);
 
             if (testColisions->createStroke(path->path()).contains(QPointF(this->x()+this->getSize(), this->y()+this->getSize()))) {
             }
@@ -240,26 +246,28 @@ bool Snake::checkColisions()
                 list.removeAt(p);
             }
 
-        } else {
-            CorpsSnake * itemCorps = dynamic_cast<CorpsSnake*>(i);
-            if (itemCorps) {
-                int size = corps.size();
-                for (int i = 0; i < size ; i++) {
-                    if (itemCorps == corps[i]) {
-                        list.removeAt(p);
-                    }
-                }
             } else {
-                Snake * item = dynamic_cast<Snake*>(i);
-                if (item)
-                {
-                    //if snake type : ignore
-                    list.removeAt(p);
+                CorpsSnake * itemCorps = dynamic_cast<CorpsSnake*>(i);
+                if (itemCorps) {
+                    int size = corps.size();
+                    for (int i = 0; i < size ; i++) {
+                        if (itemCorps == corps[i]) {
+                            list.removeAt(p);
+                        }
+                    }
                 } else {
-                    p++;//sinon passer au suivant
+                    Snake * item = dynamic_cast<Snake*>(i);
+                    if (item)
+                    {
+                        //if snake type : ignore
+                        list.removeAt(p);
+                    } else {
+                        p++;//sinon passer au suivant
+                    }
                 }
             }
         }
+
     }
 
     return (list.size() > 0) ;

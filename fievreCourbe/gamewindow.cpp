@@ -21,14 +21,16 @@ GameWindow::GameWindow(std::vector<QString> joueurs, QWidget *parent, int width,
     // Background noir
     this->setBackgroundBrush(QBrush(Qt::black));
 
-    // Timer
-    clock = new QTimer();
 
-    // Signal
+    // Timer ?? un tour de jeu pour chaque fin du timer
+    clock = new QTimer();
     connect(clock,SIGNAL(timeout()),this,SLOT(play()));
 
     // Séquence d'initialisation
     initPart();
+
+    //test bonus
+    //makeBonus();
 
 }
 
@@ -239,6 +241,13 @@ void GameWindow::play()
     }
 }
 
+//add a bonus on the scene
+void GameWindow::makeBonus()
+{
+    Bonus * test = new Bonus_closepath();
+    scene->addItem(test);
+}
+
 /*******************
  ***** GETTERS *****
  *******************/
@@ -251,3 +260,4 @@ void GameWindow::setSB(ScoreBoard *sb)
 {
     this->sb = sb;
 }
+

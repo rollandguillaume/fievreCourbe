@@ -13,6 +13,7 @@
 #include "snake.h"
 #include "wall.h"
 #include "scoreboard.h"
+#include "bonus_closepath.h"
 
 class GameWindow : public QGraphicsView
 {
@@ -27,6 +28,7 @@ public:
     std::vector<Snake*> * getSnakes();
     void updateSnake(QGridLayout layout);
     void setSB(ScoreBoard * sb);
+    void makeBonus();
 
 private:
     void toPlaceSnakesOnScene();
