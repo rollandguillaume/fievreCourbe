@@ -152,7 +152,7 @@ void Snake::commitSuicide()
 }
 
 
-}
+
 
 void Snake::randomizePath()
 {
