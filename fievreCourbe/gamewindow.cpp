@@ -29,7 +29,7 @@ GameWindow::GameWindow(std::vector<QString> joueurs, QWidget *parent, int width,
     initPart();
 
     //test bonus
-    makeBonus();
+    //makeBonus();
 
 }
 
