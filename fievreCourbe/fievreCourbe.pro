@@ -13,7 +13,9 @@ SOURCES += \
     config.cpp \
     startwindow.cpp \
     dialog_key.cpp \
-    corpssnake.cpp
+    corpssnake.cpp \
+    bonus.cpp \
+    bonus_closepath.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -25,7 +27,9 @@ HEADERS += \
     config.h \
     startwindow.h \
     dialog_key.h \
-    corpssnake.h
+    corpssnake.h \
+    bonus.h \
+    bonus_closepath.h
 
 FORMS += \
     mainwindow.ui \

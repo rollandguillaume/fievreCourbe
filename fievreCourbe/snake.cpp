@@ -208,45 +208,55 @@ bool Snake::checkColisions()
 
     foreach(QGraphicsItem * i , list)
     {
-        QGraphicsPathItem * path = dynamic_cast<QGraphicsPathItem*>(i);
-        if (path) {
-
-            QPainterPathStroker * test = new QPainterPathStroker();
-
-            test->setWidth(Config::SIZE_SNAKE);
-
-            // TODO BETTER
-
-            if (test->createStroke(path->path()).contains(QPointF(this->x()+this->getSize(), this->y()+this->getSize()))) {
-                qDebug()<<"test";
-            }
-            else if (test->createStroke(path->path()).contains(QPointF(this->x(), this->y()))) {
-                qDebug()<<"test";
-            }
-            else {
-                list.removeAt(p);
-            }
-
+        Bonus * bonus = dynamic_cast<Bonus*>(i);
+        if (bonus) {
+            //executer le bonus
+            bonus->execute();
+            //le retirer de la list de colision
+            list.removeAt(p);
+            //supprimer le bonus
+            delete bonus;
         } else {
-            CorpsSnake * itemCorps = dynamic_cast<CorpsSnake*>(i);
-            if (itemCorps) {
-                int size = corps.size();
-                for (int i = 0; i < size ; i++) {
-                    if (itemCorps == corps[i]) {
-                        list.removeAt(p);
-                    }
+            QGraphicsPathItem * path = dynamic_cast<QGraphicsPathItem*>(i);
+            if (path) {
+
+                QPainterPathStroker * test = new QPainterPathStroker();
+
+                test->setWidth(Config::SIZE_SNAKE);
+
+                // TODO BETTER : eppaisseur du trait
+                if (test->createStroke(path->path()).contains(QPointF(this->x()+this->getSize(), this->y()+this->getSize()))) {
+                    qDebug()<<"test";
                 }
-            } else {
-                Snake * item = dynamic_cast<Snake*>(i);
-                if (item)
-                {
-                    //if snake type : ignore
+                else if (test->createStroke(path->path()).contains(QPointF(this->x(), this->y()))) {
+                    qDebug()<<"test";
+                }
+                else {
                     list.removeAt(p);
+                }
+
+            } else {
+                CorpsSnake * itemCorps = dynamic_cast<CorpsSnake*>(i);
+                if (itemCorps) {
+                    int size = corps.size();
+                    for (int i = 0; i < size ; i++) {
+                        if (itemCorps == corps[i]) {
+                            list.removeAt(p);
+                        }
+                    }
                 } else {
-                    p++;//sinon passer au suivant
+                    Snake * item = dynamic_cast<Snake*>(i);
+                    if (item)
+                    {
+                        //if snake type : ignore
+                        list.removeAt(p);
+                    } else {
+                        p++;//sinon passer au suivant
+                    }
                 }
             }
         }
+
     }
 
     return (list.size() > 0) ;

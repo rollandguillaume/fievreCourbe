@@ -5,11 +5,14 @@
 #include <QtGui>
 #include <QTimer>
 #include <QBrush>
+#include <QGraphicsView>
+#include <QGridLayout>
 
 #include <iostream>
 
 #include "snake.h"
 #include "wall.h"
+#include "bonus_closepath.h"
 
 class GameWindow : public QGraphicsView
 {
@@ -23,6 +26,7 @@ public:
     void createSnakes();
     std::vector<Snake*> * getSnakes();
     void updateSnake(QGridLayout layout);
+    void makeBonus();
 
 private:
     void toPlaceSnakesOnScene();
