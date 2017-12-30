@@ -1,13 +1,11 @@
 #include "bonus.h"
 
-#include "QDebug"
-
 Bonus::Bonus() : QGraphicsPixmapItem()
 {
 
 }
 
-void Bonus::init(int x, int y, std::vector<Snake *> *snakes)
+void Bonus::init(std::vector<Snake *> *snakes)
 {
     this->snakes = snakes;
 
@@ -17,6 +15,10 @@ void Bonus::init(int x, int y, std::vector<Snake *> *snakes)
 
     this->setPixmap(pixmap);
 
+}
+
+void Bonus::posAlea(int x, int y)
+{
     this->setOffset(x, y);
 }
 

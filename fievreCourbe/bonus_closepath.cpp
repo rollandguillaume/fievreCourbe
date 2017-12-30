@@ -1,22 +1,19 @@
 #include "bonus_closepath.h"
 
-#include <QDebug>
-
-Bonus_closepath::Bonus_closepath(int x, int y, std::vector<Snake *> *snakes)
+Bonus_closepath::Bonus_closepath(std::vector<Snake *> *snakes)
 {
-    //qDebug()<<"closepath bonus";
     filename = "./bonus/closepath.png";
-    Bonus::init(x, y, snakes);
+    Bonus::init(snakes);
 }
 
 
 void Bonus_closepath::execute(Snake *s)
 {
-    qDebug()<<"execution du vrai bonus "<<s->getName();
+    qDebug()<<"CLEAR_PATH :"<<s->getName();
 
     int size = snakes->size();
-    for (int s = 0; s < size; s++) {
-        Snake * item = dynamic_cast<Snake*>(snakes->at(s));
+    for (int n = 0; n < size; n++) {
+        Snake * item = dynamic_cast<Snake*>(snakes->at(n));
         if (item)
         {
             item->clearPath();

@@ -271,11 +271,20 @@ void GameWindow::makeBonus()
     std::pair<int, int> alea;
     alea = getRandomPos();
 
+    int lequel  = rand() % Config::NBR_BONUS;
+    //qDebug()<<"lequel de bonus:"<<lequel;
 
-    Bonus * b;
+    Bonus * b = NULL;
+    if (lequel==0) {
+        b = new Bonus_closepath(getSnakes());
+    } else if (lequel==1) {
+        b = new Bonus_reverse(getSnakes());
+    }
 
-    b = new Bonus_closepath(alea.first, alea.second, getSnakes());
-    scene->addItem(b);
+    if (b != NULL) {
+        b->posAlea(alea.first, alea.second);
+        scene->addItem(b);
+    }
 }
 
 /*******************

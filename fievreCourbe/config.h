@@ -18,6 +18,7 @@ public:
     static const int TIC_HOLE = 20;
 
     static const int SIZE_BONUS = 20;
+    static const int NBR_BONUS = 2;//nbr bonus effectif
     static const int SPAWN_BONUS = 50;//nbr tic to spawn a bonus
 
 };

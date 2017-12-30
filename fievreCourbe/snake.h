@@ -29,6 +29,7 @@ public:
     void setKeyOnLeft(QString val);
     int getKeyOnRight() const;
     int getKeyOnLeft() const;
+    void reverseKey();
     bool checkColisions();
     bool isAlive();
     void getOutOfHell();
@@ -67,6 +68,7 @@ private:
     int step;
     bool keyRight;//key right press ??
     bool keyLeft;
+    bool reverse;
     int direction;
     int angle;//angle de rotation
     int keyOnRight;//value of the key to turn on right

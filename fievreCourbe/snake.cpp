@@ -9,6 +9,7 @@ Snake::Snake(QString name)
     this->step = 1;
     size = Config::SIZE_SNAKE;
     hidden = false;
+    reverse = false;
 
     this->setBrush(QBrush(Qt::yellow));
     this->setPen(QPen(Qt::NoPen));
@@ -110,10 +111,18 @@ void Snake::rotation()
 //    qDebug()<<"angle:" << angle << " ; direction:"<<direction;
     if (!(keyRight && keyLeft)) {
 
-        if (keyRight) {
-            direction += angle;
-        } else if (keyLeft) {
-            direction -= angle;
+        if (reverse) {//touches inversees
+            if (keyRight) {
+                direction -= angle;
+            } else if (keyLeft) {
+                direction += angle;
+            }
+        } else {//etat normal
+            if (keyRight) {
+                direction += angle;
+            } else if (keyLeft) {
+                direction -= angle;
+            }
         }
     }
 
@@ -214,6 +223,17 @@ int Snake::getKeyOnRight() const
 int Snake::getKeyOnLeft() const
 {
     return keyOnLeft;
+}
+
+void Snake::reverseKey()
+{
+    reverse = !reverse;
+    //qDebug()<<this->getName()<<":"<<reverse;
+    if (reverse) {
+        this->setBrush(QBrush(Qt::blue));
+    } else {
+        this->setBrush(QBrush(Qt::yellow));
+    }
 }
 
 bool Snake::checkColisions()
@@ -372,7 +392,7 @@ void Snake::clearPath()
     for (int c = 0; c < size; c++) {
         scene->removeItem(corps[c]);
     }
-    //traceCorps();
+
 }
 
 void Snake::traceCorps()
