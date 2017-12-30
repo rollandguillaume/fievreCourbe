@@ -17,6 +17,7 @@
 #include "config.h"
 #include "corpssnake.h"
 #include "bonus.h"
+#include "bonus_closepath.h"
 
 class Snake : public QGraphicsEllipseItem
 {

@@ -50,6 +50,8 @@ private:
     std::vector<Wall*> walls;
     std::vector<QString> joueurs;
     int nbAlive;
+    int spawnBonusTic;
+    int spawnBonus;
 
 };
 

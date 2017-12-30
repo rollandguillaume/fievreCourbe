@@ -6,7 +6,7 @@
 class Bonus_closepath : public Bonus
 {
 public:
-    Bonus_closepath();
+    Bonus_closepath(int x, int y);
     void execute();
 };
 

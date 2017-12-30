@@ -2,13 +2,14 @@
 #define BONUS_H
 
 #include <QGraphicsPixmapItem>
+#include "config.h"
 
 class Bonus : public QGraphicsPixmapItem
 {
 public:
     Bonus();
-    void init();
-    void execute();
+    void init(int x, int y);
+    virtual void execute();
 
 public:
     QString filename;

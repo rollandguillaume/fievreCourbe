@@ -26,11 +26,9 @@ GameWindow::GameWindow(std::vector<QString> joueurs, QWidget *parent, int width,
     clock = new QTimer();
     connect(clock,SIGNAL(timeout()),this,SLOT(play()));
 
+
     // Séquence d'initialisation
     initPart();
-
-    //test bonus
-    //makeBonus();
 
 }
 
@@ -84,6 +82,9 @@ void GameWindow::initPart()
     if ( clock->isActive() ){
         clock->stop();
     }
+
+    spawnBonusTic = Config::SPAWN_BONUS;
+    spawnBonus = 0;
 
     toRemoveSnakesOnScene();
     createSnakes();
@@ -204,6 +205,15 @@ void GameWindow::erectWalls()
 // Un tour de jeu
 void GameWindow::play()
 {
+    //add a bonus
+    if (spawnBonus >= spawnBonusTic) {
+        makeBonus();
+        spawnBonus = 0;
+    } else {
+        spawnBonus++;
+    }
+
+
     // Le nombre de Snake
     int size = snakes.size();
     nbAlive = 0;
@@ -244,8 +254,14 @@ void GameWindow::play()
 //add a bonus on the scene
 void GameWindow::makeBonus()
 {
-    Bonus * test = new Bonus_closepath();
-    scene->addItem(test);
+    std::pair<int, int> alea;
+    alea = getRandomPos();
+
+
+    Bonus * b;
+
+    b = new Bonus_closepath(alea.first, alea.second);
+    scene->addItem(b);
 }
 
 /*******************

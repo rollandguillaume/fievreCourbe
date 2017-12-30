@@ -2,15 +2,15 @@
 
 #include <QDebug>
 
-Bonus_closepath::Bonus_closepath()
+Bonus_closepath::Bonus_closepath(int x, int y)
 {
-    qDebug()<<"closepath bonus";
-    filename = "./bonus/test.jpeg";
-    Bonus::init();
+    //qDebug()<<"closepath bonus";
+    filename = "./bonus/test.png";
+    Bonus::init(x, y);
 }
 
 
 void Bonus_closepath::execute()
 {
-    qDebug()<<"execution du vrai bonus";
+    qDebug()<<"execution du vrai bonus ";
 }
