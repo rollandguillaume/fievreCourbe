@@ -226,11 +226,12 @@ bool Snake::checkColisions()
         Bonus * bonus = dynamic_cast<Bonus*>(i);
         if (bonus) {
             //executer le bonus
-            bonus->execute();
+            bonus->execute(this);
             //le retirer de la list de colision
             list.removeAt(p);
             //supprimer le bonus
             delete bonus;
+            bonus = NULL;
         } else {
             QGraphicsPathItem * path = dynamic_cast<QGraphicsPathItem*>(i);
             if (path) {

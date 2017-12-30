@@ -10,7 +10,7 @@ Bonus_closepath::Bonus_closepath(int x, int y)
 }
 
 
-void Bonus_closepath::execute()
+void Bonus_closepath::execute(Snake *s)
 {
-    qDebug()<<"execution du vrai bonus ";
+    qDebug()<<"execution du vrai bonus "<<s->getName();
 }

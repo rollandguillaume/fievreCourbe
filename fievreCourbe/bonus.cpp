@@ -18,8 +18,8 @@ void Bonus::init(int x, int y)
     this->setOffset(x, y);
 }
 
-void Bonus::execute()
+void Bonus::execute(Snake *s)
 {
-    qDebug()<<"execution du bonus";
+    qDebug()<<"execution du bonus"<<s->getName();
 }
 

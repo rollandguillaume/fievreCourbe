@@ -3,11 +3,13 @@
 
 #include "bonus.h"
 
+
+
 class Bonus_closepath : public Bonus
 {
 public:
     Bonus_closepath(int x, int y);
-    void execute();
+    void execute(Snake*s);
 };
 
 #endif // BONUS_CLOSEPATH_H

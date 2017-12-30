@@ -37,6 +37,7 @@ private:
     void destroyWalls();
     std::pair<int, int> getRandomPos();
     void endGame();
+    void removeAllBonus();
 
 public slots:
     void play();

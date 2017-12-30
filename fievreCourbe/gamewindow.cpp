@@ -85,6 +85,7 @@ void GameWindow::initPart()
 
     spawnBonusTic = Config::SPAWN_BONUS;
     spawnBonus = 0;
+    removeAllBonus();
 
     toRemoveSnakesOnScene();
     createSnakes();
@@ -180,6 +181,19 @@ void GameWindow::endGame()
         }
     }
     // TODO fin de la partie retour vers l'ecran start window ?
+}
+
+void GameWindow::removeAllBonus()
+{
+    QList<QGraphicsItem*> all = scene->items();
+
+    foreach(QGraphicsItem * i , all)
+    {
+        Bonus * bonus = dynamic_cast<Bonus*>(i);
+        if (bonus) {
+            scene->removeItem(i);
+        }
+    }
 }
 
 // Créer les murs
