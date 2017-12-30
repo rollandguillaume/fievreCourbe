@@ -8,7 +8,7 @@
 class Bonus_closepath : public Bonus
 {
 public:
-    Bonus_closepath(int x, int y);
+    Bonus_closepath(int x, int y, std::vector<Snake*> *snakes);
     void execute(Snake*s);
 };
 

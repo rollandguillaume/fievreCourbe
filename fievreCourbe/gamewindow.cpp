@@ -274,7 +274,7 @@ void GameWindow::makeBonus()
 
     Bonus * b;
 
-    b = new Bonus_closepath(alea.first, alea.second);
+    b = new Bonus_closepath(alea.first, alea.second, getSnakes());
     scene->addItem(b);
 }
 

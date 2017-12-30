@@ -372,6 +372,7 @@ void Snake::clearPath()
     for (int c = 0; c < size; c++) {
         scene->removeItem(corps[c]);
     }
+    //traceCorps();
 }
 
 void Snake::traceCorps()
