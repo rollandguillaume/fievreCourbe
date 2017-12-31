@@ -16,7 +16,8 @@ SOURCES += \
     corpssnake.cpp \
     bonus.cpp \
     bonus_closepath.cpp \
-    bonus_reverse.cpp
+    bonus_reverse.cpp \
+    bonus_ghost.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -31,7 +32,8 @@ HEADERS += \
     corpssnake.h \
     bonus.h \
     bonus_closepath.h \
-    bonus_reverse.h
+    bonus_reverse.h \
+    bonus_ghost.h
 
 FORMS += \
     mainwindow.ui \

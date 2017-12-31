@@ -95,8 +95,9 @@ void Snake::move()
                 this->compteurPrint = Config::COMPTEUR_PRINT;
             } else {
                 this->compteurPrint--;
-
             }
+
+
         }
     }
 
@@ -183,6 +184,12 @@ void Snake::setScore(QString val)
 
 }
 
+void Snake::setHidden(bool b)
+{
+    hidden = b;
+}
+
+
 void Snake::setKeyRight(bool press)
 {
     this->keyRight = press;
@@ -253,44 +260,48 @@ bool Snake::checkColisions()
             delete bonus;
             bonus = NULL;
         } else {
-            QGraphicsPathItem * path = dynamic_cast<QGraphicsPathItem*>(i);
-            if (path) {
+            if (!hidden) {
+                QGraphicsPathItem * path = dynamic_cast<QGraphicsPathItem*>(i);
+                if (path) {
 
-                QPainterPathStroker * testColisions = new QPainterPathStroker();
-                testColisions->setWidth(Config::SIZE_SNAKE);
+                    QPainterPathStroker * testColisions = new QPainterPathStroker();
+                    testColisions->setWidth(Config::SIZE_SNAKE);
 
-            if (testColisions->createStroke(path->path()).contains(QPointF(this->x()+this->getSize(), this->y()+this->getSize()))) {
-            }
-            else if (testColisions->createStroke(path->path()).contains(QPointF(this->x(), this->y()))) {
-            }
-            else {
+                if (testColisions->createStroke(path->path()).contains(QPointF(this->x()+this->getSize(), this->y()+this->getSize()))) {
+                }
+                else if (testColisions->createStroke(path->path()).contains(QPointF(this->x(), this->y()))) {
+                }
+                else {
+                    list.removeAt(p);
+                }
+
+                } else {
+                    CorpsSnake * itemCorps = dynamic_cast<CorpsSnake*>(i);
+                    if (itemCorps) {
+                        int size = corps.size();
+                        for (int i = 0; i < size ; i++) {
+                            if (itemCorps == corps[i]) {
+                                list.removeAt(p);
+                            }
+                        }
+                    } else {
+                        Snake * item = dynamic_cast<Snake*>(i);
+                        if (item)
+                        {
+                            //if snake type : ignore
+                            list.removeAt(p);
+                        } else {
+                            p++;//sinon passer au suivant
+                        }
+                    }
+                }
+            } else {
                 list.removeAt(p);
             }
 
-            } else {
-                CorpsSnake * itemCorps = dynamic_cast<CorpsSnake*>(i);
-                if (itemCorps) {
-                    int size = corps.size();
-                    for (int i = 0; i < size ; i++) {
-                        if (itemCorps == corps[i]) {
-                            list.removeAt(p);
-                        }
-                    }
-                } else {
-                    Snake * item = dynamic_cast<Snake*>(i);
-                    if (item)
-                    {
-                        //if snake type : ignore
-                        list.removeAt(p);
-                    } else {
-                        p++;//sinon passer au suivant
-                    }
-                }
-            }
         }
 
     }
-
     return (list.size() > 0) ;
 }
 
@@ -359,7 +370,7 @@ void Snake::addTrace()
 
     scene->removeItem(pathCourbe);
 
-    if (cptHole > 0 && cptPath <= 0) {
+    if ((cptHole > 0 && cptPath <= 0) || hidden) {
         courbe.moveTo(xpos+getSize()/2, ypos+getSize()/2);
     } else {
         courbe.lineTo(xpos+getSize()/2, ypos+getSize()/2);

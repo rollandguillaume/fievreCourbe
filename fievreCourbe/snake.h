@@ -47,6 +47,7 @@ public:
     void bodyFollowHead();
     void updateScore();
     void setScore(QString val);
+    void setHidden(bool b);
 
 private:
     void rotation();

@@ -279,6 +279,8 @@ void GameWindow::makeBonus()
         b = new Bonus_closepath(getSnakes());
     } else if (lequel==1) {
         b = new Bonus_reverse(getSnakes());
+    } else if (lequel==2) {
+        b = new Bonus_ghost(getSnakes());
     }
 
     if (b != NULL) {

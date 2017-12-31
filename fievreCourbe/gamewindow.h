@@ -15,6 +15,7 @@
 #include "scoreboard.h"
 #include "bonus_closepath.h"
 #include "bonus_reverse.h"
+#include "bonus_ghost.h"
 
 class GameWindow : public QGraphicsView
 {

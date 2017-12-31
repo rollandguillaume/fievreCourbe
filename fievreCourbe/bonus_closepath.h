@@ -3,8 +3,6 @@
 
 #include "bonus.h"
 
-
-
 class Bonus_closepath : public Bonus
 {
 public:
