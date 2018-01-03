@@ -48,6 +48,7 @@ public:
     void updateScore();
     void setScore(QString val);
     void setHidden(bool b);
+    Snake& operator++();
 
 private:
     void rotation();

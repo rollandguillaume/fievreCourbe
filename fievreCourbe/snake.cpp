@@ -434,3 +434,8 @@ void Snake::bodyFollowHead()
     co->setPos(x(),y());
     corps.insert(corps.begin(), co);
 }
+
+Snake& Snake::operator++() {
+    this->updateScore();
+    return *this;
+}

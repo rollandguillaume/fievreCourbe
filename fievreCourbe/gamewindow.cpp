@@ -252,7 +252,9 @@ void GameWindow::play()
         // Si un snake est mort, on update le score des vivants
         if(tmp != nbAlive) {
             for (int t = 0; t < size; t++) {
-                snakes[t]->updateScore();
+                //snakes[t]->updateScore();
+
+                ++ (*snakes[t]);
                 this->sb->score(t, snakes[t]->getScore());
             }
             nbAlive = tmp;
