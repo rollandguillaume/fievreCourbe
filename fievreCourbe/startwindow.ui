@@ -32,10 +32,23 @@
      <x>20</x>
      <y>20</y>
      <width>351</width>
-     <height>80</height>
+     <height>211</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout"/>
+  </widget>
+  <widget class="QPushButton" name="add_btn">
+   <property name="geometry">
+    <rect>
+     <x>199</x>
+     <y>250</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ajouter un joueur</string>
+   </property>
   </widget>
  </widget>
  <resources/>

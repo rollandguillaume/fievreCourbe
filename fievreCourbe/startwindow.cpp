@@ -12,6 +12,9 @@ StartWindow::StartWindow(QWidget *parent) :
     // Button start clicked so it starts the game
     QObject::connect(ui->start_btn, SIGNAL(clicked()), parent, SLOT(start()));
 
+    // Button start clicked so it starts the game
+    QObject::connect(ui->add_btn, SIGNAL(clicked()), this, SLOT(addJoueurBtn()));
+
     // Initialisation du formurlaire de controle pour les joueurs
     QLabel *nom = new QLabel("Nom");
     nom->setAlignment(Qt::AlignHCenter);
@@ -44,7 +47,12 @@ void StartWindow::addJoueur()
 {
     // Initialisation du joueur i
     int i = joueurs.size();
-    QString joueur = "Joueur" + QString::number(i+1) + ";";
+
+    // Limitation du nombre de joueurs à 6
+    if(i == 5) {
+        ui->add_btn->setEnabled(false);
+    }
+    QString joueur = names[i] + ";";
 
     // Entrée des touches droites et gauches
     dialog_key = new Dialog_Key("Gauche", this);
@@ -61,7 +69,7 @@ void StartWindow::addJoueur()
 
     // Affiche du joueur créer
 
-    QLabel *nom = new QLabel("Joueur" + QString::number(i+1));
+    QLabel *nom = new QLabel(names[i]);
     nom->setAlignment(Qt::AlignHCenter);
 
     QLabel *gauche = new QLabel(QKeySequence(keyLeft).toString());
@@ -80,7 +88,12 @@ void StartWindow::addJoueur()
 
 void StartWindow::deleteJoueur(int index)
 {
+    // TODO
+}
 
+void StartWindow::addJoueurBtn()
+{
+    this->addJoueur();
 }
 
 std::vector<QString> StartWindow::getJoueurs()
