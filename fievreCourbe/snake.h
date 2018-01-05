@@ -39,7 +39,6 @@ public:
     void setScene(QGraphicsScene * scene);
     void setColor(QString color);
     qreal getSize() const;
-    void growUp();
     void addTrace();
     void setPosInit(float x, float y);
     void clearPath();
@@ -63,30 +62,29 @@ public:
     static const int HAUT = 3;
 
 private:
-//    QGraphicsItem * head;
-    std::vector<CorpsSnake *> corps;
-    QString name;
-    int score;
-    int step;
-    bool keyRight;//key right press ??
+    std::vector<CorpsSnake *> corps;//liste constituant le corps du serpent
+    QString name;//le nom du joueurs
+    int score;//le score actuel du joueur
+    int step;//la vitesse de deplacement du joueur
+    bool keyRight;//indique si la touche pour tourner a droite est pressé
     bool keyLeft;
-    bool reverse;
-    int direction;
+    bool reverse;//indique si les commandes du joueurs doivent etre inversé
+    int direction;//direction en degre vers la quelle se dirige le joueur (droite toute = 0)
     int angle;//angle de rotation
     int keyOnRight;//value of the key to turn on right
     int keyOnLeft;
     bool life;//isalive
     QGraphicsScene * scene;
-    QString couleur;
+    QString couleur;//couleur du joueur
     int compteurPrint;//nombre de tic avant de repaint trace
 
-    QPainterPath courbe;
+    QPainterPath courbe;//la trace laissé par le serpent
     QGraphicsPathItem * pathCourbe;
     int cptPath;//nombre de tic d'impression trace
     int cptHole;//nombre de tic de non impression (=creux courbe)
 
-    bool hidden;
-    int size;
+    bool hidden;//indique si le joueur est autorisé a traverser les murs/autres serpents
+    int size;//eppaisseur du trait de la trace
 
 };
 

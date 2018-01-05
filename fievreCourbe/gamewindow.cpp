@@ -38,6 +38,14 @@ GameWindow::~GameWindow()
 
 }
 
+/**
+ * @brief GameWindow::keyPressEvent
+ *  pour un event clavier
+ *  si la touche pressé appartient a un serpent
+ *  alors on active le fait que ce serpent tourne
+ *  , s'il s'agit d'un event repeat, il est ignoré
+ * @param event
+ */
 void GameWindow::keyPressEvent(QKeyEvent *event)
 {
     if (event->isAutoRepeat()==false) {
@@ -63,6 +71,13 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
+/**
+ * @brief GameWindow::keyPressEvent
+ *  pour un event clavier
+ *  si la touche relachée appartient a un serpent
+ *  alors on désactive le fait que ce serpent tourne
+ * @param event
+ */
 void GameWindow::keyReleaseEvent(QKeyEvent *event)
 {
     if (event->isAutoRepeat()==false) {
@@ -77,8 +92,17 @@ void GameWindow::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
+/**
+ * @brief GameWindow::initPart
+ *  initialise une partie au depart d'une manche
+ *  enlever tout les bonus s'il y en a
+ *  enlever tous les serpents present
+ *  replacer tous les serpent a de nouvelle position
+ *  replacer les murs
+ */
 void GameWindow::initPart()
 {
+    //arret du timer de tour de jeu si seulement actif
     if ( clock->isActive() ){
         clock->stop();
     }
@@ -97,7 +121,10 @@ void GameWindow::initPart()
     erectWalls();
 }
 
-// Efface tous les serpents sur l'écran
+/**
+ * @brief GameWindow::toRemoveSnakesOnScene
+ *  Efface tous les serpents sur l'écran
+ */
 void GameWindow::toRemoveSnakesOnScene()
 {
     int size = snakes.size();
@@ -115,10 +142,12 @@ void GameWindow::toRemoveSnakesOnScene()
 
 }
 
-// Créer tous les serpents
+/**
+ * @brief GameWindow::createSnakes
+ *   Créer tous les serpents
+ */
 void GameWindow::createSnakes()
 {
-
     snakes.clear();
 
     int size = joueurs.size();
@@ -138,7 +167,10 @@ void GameWindow::createSnakes()
     }
 }
 
-// Place tous les serpents sur l'écran
+/**
+ * @brief GameWindow::toPlaceSnakesOnScene
+ *  Place tous les serpents sur l'écran
+ */
 void GameWindow::toPlaceSnakesOnScene()
 {
     //give a random position
@@ -153,7 +185,10 @@ void GameWindow::toPlaceSnakesOnScene()
     }
 }
 
-// Détruit les murs
+/**
+ * @brief GameWindow::destroyWalls
+ *  Détruit les murs
+ */
 void GameWindow::destroyWalls()
 {
     int size = walls.size();
@@ -162,6 +197,13 @@ void GameWindow::destroyWalls()
     }
 }
 
+/**
+ * @brief GameWindow::getRandomPos
+ *  donne deux entier aleatoire
+ *  un premier compris entre la largeur de la scene en retirant une largeur a gauche et a droite
+ *  un second compris entre la hauteur de la scene en retirant une hauteur en haut et en bas
+ * @return une pair d'entier servant de coordonnees
+ */
 std::pair<int, int> GameWindow::getRandomPos()
 {
     int min = Config::SPACE_FROM_WALL;
@@ -172,6 +214,11 @@ std::pair<int, int> GameWindow::getRandomPos()
     return std::pair<int, int>(a, b);
 }
 
+/**
+ * @brief GameWindow::endGame
+ *  fin de la partie lorsqu'un joueur atteint un certain score
+ *  retour sur l'ecran d'accueil
+ */
 void GameWindow::endGame()
 {
     int size = snakes.size();
@@ -183,6 +230,10 @@ void GameWindow::endGame()
     // TODO fin de la partie retour vers l'ecran start window ?
 }
 
+/**
+ * @brief GameWindow::removeAllBonus
+ *  Suppression de tous les bonus present sur la scene
+ */
 void GameWindow::removeAllBonus()
 {
     QList<QGraphicsItem*> all = scene->items();
@@ -196,18 +247,21 @@ void GameWindow::removeAllBonus()
     }
 }
 
-// Créer les murs
+/**
+ * @brief GameWindow::erectWalls
+ *  Créer les murs
+ */
 void GameWindow::erectWalls()
 {
     int width = Config::WIDTH;
     int height = Config::HEIGHT;
     int wallSize = Config::WALL_SIZE;
     if(walls.size()==0){
-        walls.push_back(new Wall(0, 0, wallSize, height));
-        walls.push_back(new Wall(0, 0, width, wallSize));
+        walls.push_back(new Wall(0, 0, wallSize, height));//mur gauche
+        walls.push_back(new Wall(0, 0, width, wallSize));//mur haut
 
-        walls.push_back(new Wall(width-wallSize, 0, wallSize, height));
-        walls.push_back(new Wall(0, height-wallSize, width, wallSize));
+        walls.push_back(new Wall(width-wallSize, 0, wallSize, height));//mur droite
+        walls.push_back(new Wall(0, height-wallSize, width, wallSize));//mur bas
     }
 
     int size = walls.size();
@@ -216,17 +270,19 @@ void GameWindow::erectWalls()
     }
 }
 
-// Un tour de jeu
+/**
+ * @brief GameWindow::play
+ *   Un tour de jeu
+ */
 void GameWindow::play()
 {
-    //add a bonus
+    //add a bonus si le timer de bonus atteint le nombre de tic necessaire
     if (spawnBonus >= spawnBonusTic) {
         makeBonus();
         spawnBonus = 0;
     } else {
         spawnBonus++;
     }
-
 
     // Le nombre de Snake
     int size = snakes.size();
@@ -267,7 +323,14 @@ void GameWindow::play()
     }
 }
 
-//add a bonus on the scene
+/**
+ * @brief GameWindow::makeBonus
+ *  add a bonus on the scene
+ *  en fonction du nombre de bonus existant (voir config)
+ *  selection d'un alea entre 0 et le nombre de bonus existant
+ *  creation equiprobable d'un bonus
+ *  ajout sur la scene en une position aleatoire
+ */
 void GameWindow::makeBonus()
 {
     std::pair<int, int> alea;
@@ -291,16 +354,27 @@ void GameWindow::makeBonus()
     }
 }
 
+/**
+ * @brief GameWindow::setSB
+ * @param sb
+ */
+void GameWindow::setSB(ScoreBoard *sb)
+{
+    this->sb = sb;
+}
+
 /*******************
  ***** GETTERS *****
  *******************/
+
+/**
+ * @brief GameWindow::getSnakes
+ * @return la liste des serpents de la partie
+ */
 std::vector<Snake*>* GameWindow::getSnakes()
 {
     return &snakes;
 }
 
-void GameWindow::setSB(ScoreBoard *sb)
-{
-    this->sb = sb;
-}
+
 

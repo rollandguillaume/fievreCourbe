@@ -17,8 +17,8 @@ public:
     virtual void execute(Snake*s);
 
 public:
-    QString filename;
-    std::vector<Snake*> * snakes;
+    QString filename;//nom du fichier de l'image permettant l'affichage du bonus
+    std::vector<Snake*> * snakes;//liste des serpent de la partie
 };
 
 #endif // BONUS_H

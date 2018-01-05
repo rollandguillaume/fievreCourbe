@@ -9,7 +9,6 @@ Dialog_help::Dialog_help(QWidget *parent) :
 }
 
 
-
 Dialog_help::~Dialog_help()
 {
     delete ui;

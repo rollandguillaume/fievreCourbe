@@ -3,6 +3,12 @@
 
 #include <QDebug>
 
+/**
+ * @brief ScoreBoard::ScoreBoard
+ *  affichage des score courant de tous les jouerus
+ * @param parent
+ * @param snakes
+ */
 ScoreBoard::ScoreBoard(QWidget *parent, std::vector<Snake*> *snakes) :
     QWidget(parent),
     ui(new Ui::ScoreBoard)

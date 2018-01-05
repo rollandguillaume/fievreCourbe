@@ -46,15 +46,15 @@ public slots:
     void initPart();
 
 private:
-    QTimer * clock;
-    QGraphicsScene * scene;
-    ScoreBoard * sb;
-    std::vector<Snake*> snakes;
-    std::vector<Wall*> walls;
+    QTimer * clock;//timer pour effectuer un tour de jeu (un deplacement de chaque serpent)
+    QGraphicsScene * scene;//la zone d'evolution des joueurs
+    ScoreBoard * sb;//la zone d'affichage des scores des joueurs
+    std::vector<Snake*> snakes;//la liste des serpents present dans la partie
+    std::vector<Wall*> walls;//la liste des murs/bordure de la scene
     std::vector<QString> joueurs;
-    int nbAlive;
-    int spawnBonusTic;
-    int spawnBonus;
+    int nbAlive;//indique le nombre de joueurs encore en vie lors d'une manche
+    int spawnBonusTic;//entier a atteindre avant de faire spawn un bonus
+    int spawnBonus;//compteur incrementant jusqu'a ajouter un bonus
 
 };
 
