@@ -48,6 +48,7 @@ public slots:
 private:
     QTimer * clock;//timer pour effectuer un tour de jeu (un deplacement de chaque serpent)
     QGraphicsScene * scene;//la zone d'evolution des joueurs
+    QAction * newGame; // Action a trigger pour lancer une nouvelle game, ici utilisé quand la partie est finie
     ScoreBoard * sb;//la zone d'affichage des scores des joueurs
     std::vector<Snake*> snakes;//la liste des serpents present dans la partie
     std::vector<Wall*> walls;//la liste des murs/bordure de la scene
