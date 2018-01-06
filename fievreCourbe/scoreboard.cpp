@@ -43,18 +43,15 @@ ScoreBoard::~ScoreBoard()
 
 void ScoreBoard::score(std::vector<Snake*> *snakes)
 {
-    //std::vector<Snake*> *sortedSnakes(snakes);
-    //std::sort (sortedSnakes->begin(), sortedSnakes->end());
-
     // Boucle sur tous les snakes
     int size = snakes->size();
 
     for (int s = 0; s < size; s++) {
-        //qDebug() << snakes->at(s)->getName() << snakes->at(s)->getScore();
-        //qDebug() << sortedSnakes->at(s)->getName() << sortedSnakes->at(s)->getScore();
         scores.at(s)->first->setText(snakes->at(s)->getName());
         scores.at(s)->second->setText(QString::number(snakes->at(s)->getScore()));
-
+        if( snakes->at(s)->getScore() >= (size-1)*10){
+            scores.at(s)->first->setText("WINNER : " + snakes->at(s)->getName());
+        }
     }
 
 }
