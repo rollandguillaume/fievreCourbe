@@ -61,12 +61,12 @@ public:
     static const int DROITE = 1;//direction du serpent
     static const int GAUCHE = 2;
     static const int HAUT = 3;
+    int score;
 
 private:
 //    QGraphicsItem * head;
     std::vector<CorpsSnake *> corps;
     QString name;
-    int score;
     int step;
     bool keyRight;//key right press ??
     bool keyLeft;

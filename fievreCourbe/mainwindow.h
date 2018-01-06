@@ -35,6 +35,7 @@ private:
 
 public slots:
     void start();
+    void test();
     void dialogHelp();
 };
 

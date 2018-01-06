@@ -439,3 +439,8 @@ Snake& Snake::operator++() {
     this->updateScore();
     return *this;
 }
+
+bool operator< (Snake const &p1, Snake const &p2)
+{
+    return p1.score < p2.score;
+}
