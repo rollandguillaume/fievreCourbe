@@ -102,7 +102,6 @@ void GameWindow::keyReleaseEvent(QKeyEvent *event)
  */
 void GameWindow::initPart()
 {
-    //arret du timer de tour de jeu si seulement actif
     if ( clock->isActive() ){
         clock->stop();
     }
@@ -311,7 +310,7 @@ void GameWindow::play()
                 //snakes[t]->updateScore();
 
                 ++ (*snakes[t]);
-                this->sb->score(t, snakes[t]->getScore());
+                this->sb->score(getSnakes());
             }
             nbAlive = tmp;
         }

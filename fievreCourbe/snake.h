@@ -60,6 +60,7 @@ public:
     static const int DROITE = 1;//direction du serpent
     static const int GAUCHE = 2;
     static const int HAUT = 3;
+    //int score;
 
 private:
     std::vector<CorpsSnake *> corps;//liste constituant le corps du serpent
@@ -67,7 +68,7 @@ private:
     int score;//le score actuel du joueur
     int step;//la vitesse de deplacement du joueur
     bool keyRight;//indique si la touche pour tourner a droite est pressé
-    bool keyLeft;
+    bool keyLeft;//indique si la touche pour tourner a gauche est pressé
     bool reverse;//indique si les commandes du joueurs doivent etre inversé
     int direction;//direction en degre vers la quelle se dirige le joueur (droite toute = 0)
     int angle;//angle de rotation

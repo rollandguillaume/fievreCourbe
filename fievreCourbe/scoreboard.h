@@ -17,8 +17,7 @@ class ScoreBoard : public QWidget
 public:
     explicit ScoreBoard(QWidget * parent, std::vector<Snake*> * snakes);
     ~ScoreBoard();
-    void score(int snakeIndex, int score);
-    void resetScore();
+    void score(std::vector<Snake*> *snakes);
 
 private:
     Ui::ScoreBoard * ui;

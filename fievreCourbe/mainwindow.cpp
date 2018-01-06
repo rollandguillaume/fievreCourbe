@@ -11,6 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // Help dialog : shows the instructions of the game (Ctrl+Shift+H)
     dialog_help = new Dialog_help(this);
 
+    // Set the new action : restart a new game (Ctrl+Shift+N)
+    QObject::connect(ui->action_new, SIGNAL(triggered(bool)), this, SLOT(test()));
+
     // Initialize the startWindow where you configure the game
     start_win = new StartWindow(this);
 
@@ -42,6 +45,14 @@ void MainWindow::start()
     // Setting of the window size so it shows all the GameWindow
     this->adjustSize();
     this->setFixedWidth(game_win->width() + sb->width());
+
+}
+
+void MainWindow::test()
+{
+    start_win = new StartWindow(this);
+    this->setCentralWidget(start_win);
+    //ui->setupUi(this);
 
 }
 

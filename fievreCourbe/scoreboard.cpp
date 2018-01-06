@@ -17,6 +17,7 @@ ScoreBoard::ScoreBoard(QWidget *parent, std::vector<Snake*> *snakes) :
 
     // Boucle sur tous les snakes
     int size = snakes->size();
+
     for (int s = 0; s < size; s++) {
         // On créer l'affichage du score d'un snake
         scores.push_back(
@@ -46,15 +47,20 @@ ScoreBoard::~ScoreBoard()
     delete ui;
 }
 
-void ScoreBoard::score(int snakeIndex, int score)
+void ScoreBoard::score(std::vector<Snake*> *snakes)
 {
-    scores.at(snakeIndex)->second->setText(QString::number(score));
-}
+    //std::vector<Snake*> *sortedSnakes(snakes);
+    //std::sort (sortedSnakes->begin(), sortedSnakes->end());
 
-void ScoreBoard::resetScore()
-{
-    int size = scores.size();
-    for (int i = 0; i < size; i++) {
-        score(i, 0);
+    // Boucle sur tous les snakes
+    int size = snakes->size();
+
+    for (int s = 0; s < size; s++) {
+        //qDebug() << snakes->at(s)->getName() << snakes->at(s)->getScore();
+        //qDebug() << sortedSnakes->at(s)->getName() << sortedSnakes->at(s)->getScore();
+        scores.at(s)->first->setText(snakes->at(s)->getName());
+        scores.at(s)->second->setText(QString::number(snakes->at(s)->getScore()));
+
     }
+
 }

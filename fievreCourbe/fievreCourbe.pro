@@ -17,7 +17,8 @@ SOURCES += \
     bonus.cpp \
     bonus_closepath.cpp \
     bonus_reverse.cpp \
-    bonus_ghost.cpp
+    bonus_ghost.cpp \
+    dialog_name.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -33,11 +34,13 @@ HEADERS += \
     bonus.h \
     bonus_closepath.h \
     bonus_reverse.h \
-    bonus_ghost.h
+    bonus_ghost.h \
+    dialog_name.h
 
 FORMS += \
     mainwindow.ui \
     dialog_help.ui \
     scoreboard.ui \
     startwindow.ui \
-    dialog_key.ui
+    dialog_key.ui \
+    dialog_name.ui

@@ -27,8 +27,12 @@ private:
 
 private:
     std::vector<QString> joueurs;
+    QString names[6] = {"Charlie", "Willem", "Buzz", "Jean", "Toto", "Pinkney"};
     QString colors[6] = {"red", "orange", "green", "blue", "grey", "pink"};
     Dialog_Key *dialog_key;
+
+public slots:
+    void addJoueurBtn();
 };
 
 #endif // STARTWINDOW_H
