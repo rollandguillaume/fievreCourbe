@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     dialog_help = new Dialog_help(this);
 
     // Set the new action : restart a new game (Ctrl+Shift+N)
-    QObject::connect(ui->action_new, SIGNAL(triggered(bool)), this, SLOT(test()));
+    QObject::connect(ui->action_new, SIGNAL(triggered(bool)), this, SLOT(newGame()));
 
     // Initialize the startWindow where you configure the game
     start_win = new StartWindow(this);
@@ -30,7 +30,7 @@ void MainWindow::start()
     int height = Config::HEIGHT;
 
     // Configure the GameWindow and the ScoreBoard
-    game_win = new GameWindow(start_win->getJoueurs(), this, width, height);
+    game_win = new GameWindow(start_win->getJoueurs(), ui->action_new, this, width, height);
     sb = new ScoreBoard(this, game_win->getSnakes());
     game_win->setSB(sb);
 
@@ -48,7 +48,7 @@ void MainWindow::start()
 
 }
 
-void MainWindow::test()
+void MainWindow::newGame()
 {
     start_win = new StartWindow(this);
     this->setCentralWidget(start_win);
@@ -59,6 +59,11 @@ void MainWindow::test()
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::endGame(QString *winner)
+{
+    qDebug() << "test" << winner;
 }
 
 void MainWindow::dialogHelp () {

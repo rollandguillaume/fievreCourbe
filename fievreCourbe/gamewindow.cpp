@@ -1,10 +1,11 @@
 #include "gamewindow.h"
 
-GameWindow::GameWindow(std::vector<QString> joueurs, QWidget *parent, int width, int height)
+GameWindow::GameWindow(std::vector<QString> joueurs, QAction *newGame, QWidget *parent, int width, int height)
     : QGraphicsView(parent)
 {
     // Initialise la liste de joueurs
     this->joueurs = joueurs;
+    this->newGame = newGame;
 
     // Création de la scène
     scene = new QGraphicsScene();
@@ -223,10 +224,9 @@ void GameWindow::endGame()
     int size = snakes.size();
     for (int s = 0; s < size; s++) {
         if (snakes[s]->getScore() >= ((size-1)*10)) {
-            qDebug() << "Joueur " << s << "a gagné !!";
+            this->newGame->trigger();
         }
     }
-    // TODO fin de la partie retour vers l'ecran start window ?
 }
 
 /**
