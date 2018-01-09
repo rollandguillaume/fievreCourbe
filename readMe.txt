@@ -11,17 +11,22 @@ Plateforme : QtCreator
   
 # Architecture
 
-- bonus
-- bonus_closepath
-- bonus_ghost
-- config
-- corpssnake
-- dialog_help
-- dialog_key
-- gamewindow
-- main
-- mainwindow
-- scoreboard
-- snake 
-- startwindow
-- wall
+- main              lancement de l'application
+- config            configuration du jeu
+
+- mainwindow        classe concernant la fenetre du jeu
+- gamewindow        classe concernant le terrain de jeu
+- startwindow       classe concernant l'affichage du récapitulatif de la liste des joueurs
+- scoreboard        classe concernant l'affichage des resultats des joueurs
+
+- dialog_help       pop-up d'aide affichant le manuel d'utilisation du jeu
+- dialog_key        pop-up pour entrer une touche d'un joueur
+
+- snake             classe represantant un joueur
+- corpssnake        classe composant le corp d'un joueur
+- wall              classe representant les bordures du terrain de jeu
+
+- bonus             super classe des bonus
+- bonus_closepath   classe du bonus supprimant les trace de tous les serpents
+- bonus_ghost       classe du bonus permettant au serpent d'être invinsible pour un temps
+- bonus_reverse     classe du bonus permettant d'inverser les touches des joueurs
