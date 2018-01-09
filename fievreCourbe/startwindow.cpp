@@ -65,7 +65,7 @@ void StartWindow::addJoueur()
     int keyRight = dialog_key->exec();
 
     qDebug()<<keyLeft<<";"<<keyRight;
-    if (keyLeft <= 0 || keyRight <= 0) {
+    if (keyLeft <= 0 || keyRight <= 0 || keyLeft == keyRight) {
         throw QException();
     }
 
