@@ -7,6 +7,7 @@
 #include <QBrush>
 #include <QGraphicsView>
 #include <QGridLayout>
+#include <QAction>
 
 #include <iostream>
 

@@ -8,8 +8,8 @@
 class Config
 {
 public:
-    static const int WIDTH = 500;//largeur de la scene d'evolution des joueurs
-    static const int HEIGHT = 500;//hauteur de la scene
+    static const int WIDTH = 650;//largeur de la scene d'evolution des joueurs
+    static const int HEIGHT = 650;//hauteur de la scene
     static const int CLOCK = 20;//temps pour un tour de jeu
     static const int SIZE_SNAKE = 7;//eppaisseur du trait pour les trace des serpents
     static const int COMPTEUR_PRINT = 5;//compteur pour ameliorer les performances graphiques tout en ayant un trace fluide
@@ -20,11 +20,11 @@ public:
     static const int TIC_PATH_MIN = 50;
     static const int TIC_PATH_MAX = 250;
 
-    static const int TIC_HOLE = 20;//temps pendant lequel le serpent laisse eu trou
+    static const int TIC_HOLE = 25;//temps pendant lequel le serpent laisse eu trou
 
     static const int SIZE_BONUS = 20;//taille des bonus en px sur la scene
     static const int NBR_BONUS = 3;//nbr bonus effectif
-    static const int SPAWN_BONUS = 50;//intervalle de temps pour faire spawn a bonus
+    static const int SPAWN_BONUS = 400;//intervalle de temps pour faire spawn a bonus
 
 };
 
