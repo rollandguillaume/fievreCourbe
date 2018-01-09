@@ -7,7 +7,7 @@
  */
 Bonus_reverse::Bonus_reverse(std::vector<Snake *> *snakes)
 {
-    filename = "./bonus/reverse.png";
+    filename = ":/bonus/bonus/reverse.png";
     Bonus::init(snakes);
 }
 

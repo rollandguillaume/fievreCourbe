@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/bonus">
+        <file>bonus/reverse.png</file>
+        <file>bonus/ghost.png</file>
+        <file>bonus/closepath.png</file>
+    </qresource>
+</RCC>

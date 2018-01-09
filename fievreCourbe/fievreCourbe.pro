@@ -44,3 +44,6 @@ FORMS += \
     startwindow.ui \
     dialog_key.ui \
     dialog_name.ui
+
+RESOURCES += \
+    resource.qrc

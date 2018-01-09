@@ -7,7 +7,7 @@
  */
 Bonus_ghost::Bonus_ghost(std::vector<Snake *> *snakes)
 {
-    filename = "./bonus/ghost.png";
+    filename = ":/bonus/bonus/ghost.png";
     Bonus::init(snakes);
 }
 

@@ -7,7 +7,7 @@
  */
 Bonus_closepath::Bonus_closepath(std::vector<Snake *> *snakes)
 {
-    filename = "./bonus/closepath.png";
+    filename = ":/bonus/bonus/closepath.png";
     Bonus::init(snakes);
 }
 
