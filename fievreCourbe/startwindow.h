@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <QException>
+#include <QMessageBox>
 
 #include "snake.h"
 #include "dialog_key.h"

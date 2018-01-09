@@ -33,8 +33,8 @@ StartWindow::StartWindow(QWidget *parent) :
     ui->gridLayout->addWidget(droite, 0, 3);
 
     // Ajout de 2 joueurs automatiquement
-    this->addJoueur();
-    this->addJoueur();
+    this->addJoueurBtn();
+    this->addJoueurBtn();
 
 }
 
@@ -43,6 +43,10 @@ StartWindow::~StartWindow()
     delete ui;
 }
 
+/**
+ * @brief StartWindow::addJoueur
+ *  retourne une exception si aucune touche n'a ete saisi
+ */
 void StartWindow::addJoueur()
 {
     // Initialisation du joueur i
@@ -59,6 +63,11 @@ void StartWindow::addJoueur()
     int keyLeft = dialog_key->exec();
     dialog_key = new Dialog_Key("Droite", this);
     int keyRight = dialog_key->exec();
+
+    qDebug()<<keyLeft<<";"<<keyRight;
+    if (keyLeft <= 0 || keyRight <= 0) {
+        throw QException();
+    }
 
     // Fabriction du QString
     joueur = joueur + QString::number(keyLeft) + ";" + QString::number(keyRight) + ";";
@@ -91,9 +100,23 @@ void StartWindow::deleteJoueur(int index)
     // TODO
 }
 
+/**
+ * @brief StartWindow::addJoueurBtn
+ *  previent l'utilisateur si la configuration des touches n'est pas correct
+ *  et l'invite a redefinir imediatement
+ */
 void StartWindow::addJoueurBtn()
 {
-    this->addJoueur();
+    try {
+        this->addJoueur();
+    } catch (QException e) {
+        QMessageBox * msg = new QMessageBox(this);
+        msg->setText(QString("Veuillez resaisir les touches du joueur"));
+        msg->exec();
+        qDebug()<<"exception touche joueur";
+        this->addJoueurBtn();
+    }
+
 }
 
 std::vector<QString> StartWindow::getJoueurs()
